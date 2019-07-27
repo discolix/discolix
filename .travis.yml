@@ -1,0 +1,12 @@
+dist: bionic
+sudo: required
+language: minimal
+cache:
+  directories:
+    - /tmp/bazel/disk_cache
+services:
+  - docker
+install:
+  - sudo apt-get update
+  - sudo apt-get install -y qemu-user qemu-user-static
+script: ./build_ci.sh

@@ -1,0 +1,43 @@
+schemaVersion: "1.0.0"
+fileExistenceTests:
+# Basic FS sanity checks.
+- name: root
+  path: '/'
+  shouldExist: true
+- name: tmp
+  path: '/tmp'
+  shouldExist: true
+- name: passwd
+  path: '/etc/passwd'
+  shouldExist: true
+- name: group
+  path: '/etc/group'
+  shouldExist: true
+- name: etc-os-release
+  path: '/etc/os-release'
+  shouldExist: true
+- name: certs
+  path: '/etc/ssl/certs/ca-certificates.crt'
+  shouldExist: true
+- name: certs_copyright
+  path: '/usr/share/doc/ca-certificates/copyright'
+  shouldExist: true
+- name: services
+  path: '/etc/services'
+  shouldExist: true
+- name: tzdata
+  path: '/usr/sbin/tzconfig'
+  shouldExist: true
+- name: homedir
+  path: '/root'
+  shouldExist: true
+- name: nonroot-homedir
+  path: '/home/nonroot'
+  shouldExist: true
+fileContentTests:
+- name: 'known users'
+  path: '/etc/passwd'
+  expectedContents: ['^root:x:0:0:root:/root:/sbin/nologin\nnobody:x:65534:65534:nobody:/nonexistent:/sbin/nologin\nnonroot:x:65532:65532:nonroot:/home/nonroot:/sbin/nologin\n$']
+- name: 'known groups'
+  path: '/etc/group'
+  expectedContents: ['^root:x:0:\nnobody:x:65534:\ntty:x:5:\nstaff:x:50:\nnonroot:x:65532:\n$']
