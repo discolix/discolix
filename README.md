@@ -2,14 +2,65 @@ Discolix
 ========
 [![Build Status](https://travis-ci.org/discolix/discolix.svg?branch=master)](https://travis-ci.org/discolix/discolix)
 
-"Distroless" docker images for ARM. Discolix is based on the 
+Discolix is based on the 
 [GoogleContainerTools/distroless](https://github.com/GoogleContainerTools/distroless) 
 project, but with a focus on support for popular ARM platforms.
 
-The basic idea is to provide "distroless" language focused images for the `arm`, 
-`arm64` and `amd64` architectures where the `amd64` image can serve as a drop-in 
-replacement with it's upstream variant.
+## Overview
 
-### Docker Images
+Discolix is a "distroless" language focused docker image project supporting image
+bundles for the `linux_arm`, `linux_arm64` and `linux_amd64` platforms where the
+`linux_amd64` image being capable of serving as a drop-in replacement for its
+upstream variant (if one exists) and with the additional goal of providing a 
+foundation for "multi-arch" development using docker.
 
-https://hub.docker.com/u/discolix
+## Docker Images
+
+**Hosted on DockerHub:** https://hub.docker.com/u/discolix
+
+### Image Types
+* `static`
+* `base`
+* `cc`
+
+### Manifest Lists
+
+#### `discolix/[image_type]:latest`
+
+The main `root` user image
+
+| **Image** | **OS** | **Arch** |
+|-------|:--:|:----:|
+| <nobr>`discolix/[image_type]:latest-linux_arm`</nobr> | `linux` | `arm` |
+| <nobr>`discolix/[image_type]:latest-linux_arm`</nobr> | `linux` | `arm64` |
+| <nobr>`discolix/[image_type]:latest-linux_arm`</nobr> | `linux` | `amd64` |
+
+#### `discolix/[image_type]:debug`
+
+Same as `latest`, but with busybox installed at `/busybox` (example: `/busybox/sh`). Also `/busybox` added to `$PATH`
+
+| **Image** | **OS** | **Arch** |
+|-------|:--:|:----:|
+| <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `arm` |
+| <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `arm64` |
+| <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `amd64` |
+
+#### `discolix/[image_type]:nonroot`
+
+Includes `/etc/password` entry for `nonroot` user
+
+| **Image** | **OS** | **Arch** |
+|-------|:--:|:----:|
+| <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `arm` |
+| <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `arm64` |
+| <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `amd64` |
+
+#### `discolix/[image_type]:debug-nonroot`
+
+like `debug`, but with the addition of the `nonroot` user
+
+| **Image** | **OS** | **Arch** |
+|-------|:--:|:----:|
+| <nobr>`discolix/[image_type]:debug-nonroot-linux_arm`</nobr> | `linux` | `arm` |
+| <nobr>`discolix/[image_type]:debug-nonroot-linux_arm`</nobr> | `linux` | `arm64` |
+| <nobr>`discolix/[image_type]:debug-nonroot-linux_arm`</nobr> | `linux` | `amd64` |

@@ -14,7 +14,7 @@
 
 package(default_visibility = ["//visibility:public"])
 
-load("@com_github_atlassian_bazel_tools//:multirun/def.bzl", "multirun")
+load("@io_bazel_rules_docker//container:container.bzl", "container_bundle")
 
 load("//private:deb_package_helper.bzl", "update_deb_packages")
 
@@ -43,40 +43,40 @@ package_group(
     ],
 )
 
-multirun(
+container_bundle(
     name = "load_all_images",
-    commands = [
-        "//base:static-amd64",
-        "//base:static-arm64",
-        "//base:static-arm",
-        "//base:static-nonroot-amd64",
-        "//base:static-nonroot-arm64",
-        "//base:static-nonroot-arm",
-        "//base:amd64",
-        "//base:arm64",
-        "//base:arm",
-        "//base:nonroot-amd64",
-        "//base:nonroot-arm64",
-        "//base:nonroot-arm",
-        "//base:debug-amd64",
-        "//base:debug-arm64",
-        "//base:debug-arm",
-        "//base:debug-nonroot-amd64",
-        "//base:debug-nonroot-arm64",
-        "//base:debug-nonroot-arm",
-        "//cc:amd64",
-        "//cc:arm64",
-        "//cc:arm",
-        "//cc:nonroot-amd64",
-        "//cc:nonroot-arm64",
-        "//cc:nonroot-arm",
-        "//cc:debug-amd64",
-        "//cc:debug-arm64",
-        "//cc:debug-arm",
-        "//cc:debug-nonroot-amd64",
-        "//cc:debug-nonroot-arm64",
-        "//cc:debug-nonroot-arm",
-    ],
+    images = {
+        "{PROJECT_REGISTRY_PREFIX}/static:{PROJECT_GIT_COMMIT}-linux_amd64": "//base:static-amd64",
+        "{PROJECT_REGISTRY_PREFIX}/static:{PROJECT_GIT_COMMIT}-linux_arm64": "//base:static-arm64",
+        "{PROJECT_REGISTRY_PREFIX}/static:{PROJECT_GIT_COMMIT}-linux_arm": "//base:static-arm",
+        "{PROJECT_REGISTRY_PREFIX}/static:nonroot-linux_amd64": "//base:static-nonroot-amd64",
+        "{PROJECT_REGISTRY_PREFIX}/static:nonroot-linux_arm64": "//base:static-nonroot-arm64",
+        "{PROJECT_REGISTRY_PREFIX}/static:nonroot-linux_arm": "//base:static-nonroot-arm",
+        "{PROJECT_REGISTRY_PREFIX}/base:{PROJECT_GIT_COMMIT}-linux_amd64": "//base:amd64",
+        "{PROJECT_REGISTRY_PREFIX}/base:{PROJECT_GIT_COMMIT}-linux_arm64": "//base:arm64",
+        "{PROJECT_REGISTRY_PREFIX}/base:{PROJECT_GIT_COMMIT}-linux_arm": "//base:arm",
+        "{PROJECT_REGISTRY_PREFIX}/base:nonroot-linux_amd64": "//base:nonroot-amd64",
+        "{PROJECT_REGISTRY_PREFIX}/base:nonroot-linux_arm64": "//base:nonroot-arm64",
+        "{PROJECT_REGISTRY_PREFIX}/base:nonroot-linux_arm": "//base:nonroot-arm",
+        "{PROJECT_REGISTRY_PREFIX}/base:debug-linux_amd64": "//base:debug-amd64",
+        "{PROJECT_REGISTRY_PREFIX}/base:debug-linux_arm64": "//base:debug-arm64",
+        "{PROJECT_REGISTRY_PREFIX}/base:debug-linux_arm": "//base:debug-arm",
+        "{PROJECT_REGISTRY_PREFIX}/base:debug-nonroot-linux_amd64": "//base:debug-nonroot-amd64",
+        "{PROJECT_REGISTRY_PREFIX}/base:debug-nonroot-linux_arm64": "//base:debug-nonroot-arm64",
+        "{PROJECT_REGISTRY_PREFIX}/base:debug-nonroot-linux_arm": "//base:debug-nonroot-arm",
+        "{PROJECT_REGISTRY_PREFIX}/cc:{PROJECT_GIT_COMMIT}-linux_amd64": "//cc:amd64",
+        "{PROJECT_REGISTRY_PREFIX}/cc:{PROJECT_GIT_COMMIT}-linux_arm64": "//cc:arm64",
+        "{PROJECT_REGISTRY_PREFIX}/cc:{PROJECT_GIT_COMMIT}-linux_arm": "//cc:arm",
+        "{PROJECT_REGISTRY_PREFIX}/cc:nonroot-linux_amd64": "//cc:nonroot-amd64",
+        "{PROJECT_REGISTRY_PREFIX}/cc:nonroot-linux_arm64": "//cc:nonroot-arm64",
+        "{PROJECT_REGISTRY_PREFIX}/cc:nonroot-linux_arm": "//cc:nonroot-arm",
+        "{PROJECT_REGISTRY_PREFIX}/cc:debug-linux_amd64": "//cc:debug-amd64",
+        "{PROJECT_REGISTRY_PREFIX}/cc:debug-linux_arm64": "//cc:debug-arm64",
+        "{PROJECT_REGISTRY_PREFIX}/cc:debug-linux_arm": "//cc:debug-arm",
+        "{PROJECT_REGISTRY_PREFIX}/cc:debug-nonroot-linux_amd64": "//cc:debug-nonroot-amd64",
+        "{PROJECT_REGISTRY_PREFIX}/cc:debug-nonroot-linux_arm64": "//cc:debug-nonroot-arm64",
+        "{PROJECT_REGISTRY_PREFIX}/cc:debug-nonroot-linux_arm": "//cc:debug-nonroot-arm",
+    },
 )
 
 update_deb_packages(

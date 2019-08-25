@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 # Copyright 2019 Erik Maciejewski
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-startup --max_idle_secs=5
-startup --output_user_root=/tmp/bazel/output
- 
-build --nokeep_state_after_build
-build --disk_cache=/tmp/bazel/disk_cache
-build --color=yes
+DEFAULT_BUILD_FQIN="discolix/build:latest"
+
+if [ -z "$PROJECT_BUILD_FQIN" ]; then
+    PROJECT_BUILD_FQIN=$DEFAULT_BUILD_FQIN
+fi
+
+docker run --rm \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v $PWD:/build \
+    -w /build \
+    $PROJECT_BUILD_FQIN bazel --bazelrc=tools/ci/.bazelrc $@

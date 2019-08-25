@@ -11,8 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# containerized build / development environment
+#
+# containerized build environment
 FROM debian:buster as build
 # install some build utils
 ENV DOCKER_CLI_EXPERIMENTAL=enabled
@@ -23,13 +23,13 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 # install bazel
-ENV INSTALL_BAZEL_VERSION=0.28.1
+ENV INSTALL_BAZEL_VERSION=0.29.0
 RUN curl -L https://github.com/bazelbuild/bazel/releases/download/${INSTALL_BAZEL_VERSION}/bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh \
         -o bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     chmod +x bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     ./bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     rm -f bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh
-
+# containerized development environment
 FROM build as devel
 RUN echo 'PS1="\[$(tput setaf 3)$(tput bold)[\]devel@\\h:\\W]#\[$(tput sgr0) \]"' >> /root/.bashrc
 # install go tools (non-bazel)

@@ -44,7 +44,7 @@ _repkg_deb = rule(
         ),
         "args": attr.string(),
         "_wrapper": attr.label(
-            default = Label("@com_github_discolix//repkg"),
+            default = Label("@com_github_discolix_discolix//repkg"),
             cfg = "host",
             executable = True,
             allow_files = True,

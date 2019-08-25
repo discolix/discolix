@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-workspace(name = "com_github_discolix")
+workspace(name = "com_github_discolix_discolix")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 
@@ -20,10 +20,10 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file"
 # https://github.com/bazelbuild/rules_go
 http_archive(
     name = "io_bazel_rules_go",
-    sha256 = "8df59f11fb697743cbb3f26cfb8750395f30471e9eabde0d174c3aebc7a1cd39",
+    sha256 = "313f2c7a23fecc33023563f082f381a32b9b7254f727a7dd2d6380ccc6dfe09b",
     urls = [
-        "https://storage.googleapis.com/bazel-mirror/github.com/bazelbuild/rules_go/releases/download/0.19.1/rules_go-0.19.1.tar.gz",
-        "https://github.com/bazelbuild/rules_go/releases/download/0.19.1/rules_go-0.19.1.tar.gz",
+        "https://storage.googleapis.com/bazel-mirror/github.com/bazelbuild/rules_go/releases/download/0.19.3/rules_go-0.19.3.tar.gz",
+        "https://github.com/bazelbuild/rules_go/releases/download/0.19.3/rules_go-0.19.3.tar.gz",
     ],
 )
 
@@ -49,17 +49,6 @@ container_repos()
 load("@io_bazel_rules_docker//repositories:go_repositories.bzl", container_go_deps = "go_deps")
 
 container_go_deps()
-
-http_archive(
-    name = "com_github_atlassian_bazel_tools",
-    sha256 = "6b438f4d8c698f69ed4473cba12da3c3a7febf90ce8e3c383533d5a64d8c8f19",
-    strip_prefix = "bazel-tools-6fbc36c639a8f376182bb0057dd557eb2440d4ed",
-    urls = ["https://github.com/atlassian/bazel-tools/archive/6fbc36c639a8f376182bb0057dd557eb2440d4ed.tar.gz"],
-)
-
-load("@com_github_atlassian_bazel_tools//:multirun/deps.bzl", "multirun_dependencies")
-
-multirun_dependencies()
 
 # download rules for packaging files in different formats
 # https://github.com/bazelbuild/rules_pkg

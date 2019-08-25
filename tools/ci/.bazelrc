@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# per rules_docker
-# https://github.com/bazelbuild/rules_docker
-build --host_force_python=PY2
+startup --max_idle_secs=5
 
-build --workspace_status_command=/proc/self/cwd/tools/wsc.sh
+build --color=yes
+build --nokeep_state_after_build
+build --disk_cache=/build/.bazel/disk_cache
+build --repository_cache=/build/.bazel/repo_cache
