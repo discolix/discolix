@@ -101,7 +101,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3_amd64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u1_amd64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_amd64.deb",
         "libc6": "pool/main/g/glibc/libc6_2.28-10_amd64.deb",
         "libgcc1": "pool/main/g/gcc-8/libgcc1_8.3.0-6_amd64.deb",
@@ -112,7 +112,7 @@ deb_packages(
         "qemu-user-static": "pool/main/q/qemu/qemu-user-static_3.1+dfsg-8~deb10u1_amd64.deb",
     },
     packages_sha256 = {
-        "base-files": "5977cc7871804dbb0a80de78064df351fc26a808c54d224ce543e695b92c9cab",
+        "base-files": "013619b1cefa8d1977a817744d1903792d52b63b7853dcccc3189bc88c5a155c",
         "busybox-static": "5a5f13e56389356a73d4e4eed2156b227f8be269ce4c2dcfe291484ea2fda625",
         "libc6": "6f703e27185f594f8633159d00180ea1df12d84f152261b6e88af75667195a79",
         "libgcc1": "b1bb7611f3372732889d502cb1d09fe572b5fbb5288a4a8b1ed0363fecc3555a",
@@ -126,13 +126,24 @@ deb_packages(
 )
 
 deb_packages(
+    name = "debian_buster_security_amd64",
+    arch = "amd64",
+    distro = "buster/updates",
+    distro_type = "debian",
+    mirrors = ["http://security.debian.org/debian-security"],
+    packages = {"qemu-user-static": "pool/updates/main/q/qemu/qemu-user-static_3.1+dfsg-8+deb10u2_amd64.deb"},
+    packages_sha256 = {"qemu-user-static": "f7fc5f37647997aa6d2e09d57c0d0573672f7574ff9688e86df7a6b4c2998a38"},
+    pgp_key = "buster_archive_security_key",
+)
+
+deb_packages(
     name = "debian_buster_arm64",
     arch = "arm64",
     distro = "buster",
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3_arm64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u1_arm64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_arm64.deb",
         "libc6": "pool/main/g/glibc/libc6_2.28-10_arm64.deb",
         "libgcc1": "pool/main/g/gcc-8/libgcc1_8.3.0-6_arm64.deb",
@@ -142,7 +153,7 @@ deb_packages(
         "openssl": "pool/main/o/openssl/openssl_1.1.1c-1_arm64.deb",
     },
     packages_sha256 = {
-        "base-files": "96d164b973b10ee2d70052eaa394518ca337e640a992725adff41e6676636d35",
+        "base-files": "71f0833339ef869b9c1d5977a86958975575c1ef14c2f9736aef63f58345ba27",
         "busybox-static": "253b6111898747d64c20aa255c20f5d1bbd3e9547e38bb12a550cd1ca5793e36",
         "libc6": "80f98b3c20ef093d9bdd88c150cf3d6467209d4d3b1f61abbe8379de2680a08d",
         "libgcc1": "2851ac25d12958586c035de5ec4f2fc17272dec48f776dd0dd24c62f62674fd9",
@@ -155,13 +166,24 @@ deb_packages(
 )
 
 deb_packages(
+    name = "debian_buster_security_arm64",
+    arch = "amd64",
+    distro = "buster/updates",
+    distro_type = "debian",
+    mirrors = ["http://security.debian.org/debian-security"],
+    packages = {},
+    packages_sha256 = {},
+    pgp_key = "buster_archive_security_key",
+)
+
+deb_packages(
     name = "debian_buster_armhf",
     arch = "armhf",
     distro = "buster",
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3_armhf.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u1_armhf.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_armhf.deb",
         "libc6": "pool/main/g/glibc/libc6_2.28-10_armhf.deb",
         "libgcc1": "pool/main/g/gcc-8/libgcc1_8.3.0-6_armhf.deb",
@@ -171,7 +193,7 @@ deb_packages(
         "openssl": "pool/main/o/openssl/openssl_1.1.1c-1_armhf.deb",
     },
     packages_sha256 = {
-        "base-files": "1052d1a1f5345a6a0328a3d2344c2be61e30b0d885dc65d7c2bf4905a8528a52",
+        "base-files": "7edd3a27e0bee138202487f47bd8feb4ff6af8920787a36ac02913d651ce9a53",
         "busybox-static": "ea1ee96420013d8404d677a81c92eb54adbf58852ffaa6722a39245025157304",
         "libc6": "53808a0c23b22a7b110a67c203b6d163b97045b8a440e30369ea33bcd452346d",
         "libgcc1": "2303bab1cc54099a8de5ced6601c10d4abedc62d3c12addc097f03cba1355d2d",
@@ -184,6 +206,17 @@ deb_packages(
 )
 
 deb_packages(
+    name = "debian_buster_security_armhf",
+    arch = "amd64",
+    distro = "buster/updates",
+    distro_type = "debian",
+    mirrors = ["http://security.debian.org/debian-security"],
+    packages = {},
+    packages_sha256 = {},
+    pgp_key = "buster_archive_security_key",
+)
+
+deb_packages(
     name = "debian_buster_noarch",
     arch = "armhf",
     distro = "buster",
@@ -192,12 +225,23 @@ deb_packages(
     packages = {
         "ca-certificates": "pool/main/c/ca-certificates/ca-certificates_20190110_all.deb",
         "netbase": "pool/main/n/netbase/netbase_5.6_all.deb",
-        "tzdata": "pool/main/t/tzdata/tzdata_2019a-1_all.deb",
+        "tzdata": "pool/main/t/tzdata/tzdata_2019b-0+deb10u1_all.deb",
     },
     packages_sha256 = {
         "ca-certificates": "f55f88c8cc8fe014fa931fa22eae763fb12771e2b2a04a07bba5e4fdf3a3da6c",
         "netbase": "baf0872964df0ccb10e464b47d995acbba5a0d12a97afe2646d9a6bb97e8d79d",
-        "tzdata": "588428382706ffc62bfc26cbd22376e3696735fad21e8f0d4ec189a55aea90d1",
+        "tzdata": "cb4790c6105e8a2fb45891e6aaf7c015c92aaa0b0fe07180a8127d32e7e276e5",
     },
     pgp_key = "buster_archive_key",
+)
+
+deb_packages(
+    name = "debian_buster_security_noarch",
+    arch = "amd64",
+    distro = "buster/updates",
+    distro_type = "debian",
+    mirrors = ["http://security.debian.org/debian-security"],
+    packages = {},
+    packages_sha256 = {},
+    pgp_key = "buster_archive_security_key",
 )

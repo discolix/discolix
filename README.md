@@ -32,8 +32,8 @@ The main `root` user image
 | **Image** | **OS** | **Arch** |
 |-------|:--:|:----:|
 | <nobr>`discolix/[image_type]:latest-linux_arm`</nobr> | `linux` | `arm` |
-| <nobr>`discolix/[image_type]:latest-linux_arm`</nobr> | `linux` | `arm64` |
-| <nobr>`discolix/[image_type]:latest-linux_arm`</nobr> | `linux` | `amd64` |
+| <nobr>`discolix/[image_type]:latest-linux_arm64`</nobr> | `linux` | `arm64` |
+| <nobr>`discolix/[image_type]:latest-linux_amd64`</nobr> | `linux` | `amd64` |
 
 #### `discolix/[image_type]:debug`
 
@@ -42,8 +42,8 @@ Same as `latest`, but with busybox installed at `/busybox` (example: `/busybox/s
 | **Image** | **OS** | **Arch** |
 |-------|:--:|:----:|
 | <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `arm` |
-| <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `arm64` |
-| <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `amd64` |
+| <nobr>`discolix/[image_type]:debug-linux_arm64`</nobr> | `linux` | `arm64` |
+| <nobr>`discolix/[image_type]:debug-linux_amd64`</nobr> | `linux` | `amd64` |
 
 #### `discolix/[image_type]:nonroot`
 
@@ -52,8 +52,8 @@ Includes `/etc/password` entry for `nonroot` user
 | **Image** | **OS** | **Arch** |
 |-------|:--:|:----:|
 | <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `arm` |
-| <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `arm64` |
-| <nobr>`discolix/[image_type]:debug-linux_arm`</nobr> | `linux` | `amd64` |
+| <nobr>`discolix/[image_type]:debug-linux_arm64`</nobr> | `linux` | `arm64` |
+| <nobr>`discolix/[image_type]:debug-linux_amd64`</nobr> | `linux` | `amd64` |
 
 #### `discolix/[image_type]:debug-nonroot`
 
@@ -62,5 +62,5 @@ like `debug`, but with the addition of the `nonroot` user
 | **Image** | **OS** | **Arch** |
 |-------|:--:|:----:|
 | <nobr>`discolix/[image_type]:debug-nonroot-linux_arm`</nobr> | `linux` | `arm` |
-| <nobr>`discolix/[image_type]:debug-nonroot-linux_arm`</nobr> | `linux` | `arm64` |
-| <nobr>`discolix/[image_type]:debug-nonroot-linux_arm`</nobr> | `linux` | `amd64` |
+| <nobr>`discolix/[image_type]:debug-nonroot-linux_arm64`</nobr> | `linux` | `arm64` |
+| <nobr>`discolix/[image_type]:debug-nonroot-linux_amd64`</nobr> | `linux` | `amd64` |

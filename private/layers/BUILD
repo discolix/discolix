@@ -20,6 +20,10 @@ load("@debian_buster_noarch//debs:deb_packages.bzl", "debian_buster_noarch")
 load("@debian_buster_amd64//debs:deb_packages.bzl", "debian_buster_amd64")
 load("@debian_buster_arm64//debs:deb_packages.bzl", "debian_buster_arm64")
 load("@debian_buster_armhf//debs:deb_packages.bzl", "debian_buster_armhf")
+load("@debian_buster_security_noarch//debs:deb_packages.bzl", "debian_buster_security_noarch")
+load("@debian_buster_security_amd64//debs:deb_packages.bzl", "debian_buster_security_amd64")
+load("@debian_buster_security_arm64//debs:deb_packages.bzl", "debian_buster_security_arm64")
+load("@debian_buster_security_armhf//debs:deb_packages.bzl", "debian_buster_security_armhf")
 
 load("//repkg:defs.bzl", "repkg_deb")
 load(":busybox_commands.bzl", "BUSYBOX_COMMANDS")
@@ -117,7 +121,7 @@ container_layer(
 repkg_deb(
     name = "qemu-static",
     script = "repkg_qemu-user-static.sh",
-    deb = debian_buster_amd64["qemu-user-static"],
+    deb = debian_buster_security_amd64["qemu-user-static"],
 )
 
 container_layer(

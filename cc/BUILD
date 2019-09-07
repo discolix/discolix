@@ -20,6 +20,10 @@ load("@debian_buster_noarch//debs:deb_packages.bzl", "debian_buster_noarch")
 load("@debian_buster_amd64//debs:deb_packages.bzl", "debian_buster_amd64")
 load("@debian_buster_arm64//debs:deb_packages.bzl", "debian_buster_arm64")
 load("@debian_buster_armhf//debs:deb_packages.bzl", "debian_buster_armhf")
+load("@debian_buster_security_noarch//debs:deb_packages.bzl", "debian_buster_security_noarch")
+load("@debian_buster_security_amd64//debs:deb_packages.bzl", "debian_buster_security_amd64")
+load("@debian_buster_security_arm64//debs:deb_packages.bzl", "debian_buster_security_arm64")
+load("@debian_buster_security_armhf//debs:deb_packages.bzl", "debian_buster_security_armhf")
 
 load("//private/noarch:files.bzl", "NONROOT")
 
