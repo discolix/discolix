@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # Copyright 2019 Erik Maciejewski
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,15 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# only take what we want to repackage and toss the rest
-tar -xf $REPKG_DEB_DATA_MODULE ./usr/bin/qemu-aarch64-static
-tar -xf $REPKG_DEB_DATA_MODULE ./usr/bin/qemu-arm-static
-tar -xf $REPKG_DEB_DATA_MODULE ./usr/share/doc/qemu-user-static/copyright
-rm $REPKG_DEB_DATA_MODULE
+load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
-# new data module
-tar -cf data.tar usr/
-
-# cleanup
-rm -rf usr/share/doc/qemu-user-static
-rm -rf usr/bin
+container_test(
+    name = "python",
+    size = "large",
+    configs = ["//tests:python.yaml"],
+    image = "//python:linux_amd64",
+)

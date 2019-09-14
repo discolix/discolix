@@ -13,28 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-CMDS=$1
+set -e
 
-# only take what we want to repackage and toss the rest
-tar -xf $REPKG_DEB_DATA_MODULE ./usr/share/doc/busybox-static/copyright
-tar -xf $REPKG_DEB_DATA_MODULE ./bin/busybox
-rm $REPKG_DEB_DATA_MODULE
+# discard man stuff
+rm -rf usr/share/man/
 
-# rename bin dir to keep busybox out of the root fs bin dir
-mv bin busybox
+# bytecode "standard" compile stdlib
+#files=$(find . -type f | sed -n '/^\.\/usr\/lib\/python3.7\/.*\.py$/p')
+#/usr/bin/python3.7 -E -S /usr/lib/python3.7/py_compile.py $files
 
-# generate command symlinks to busybox executable
-cd busybox
-for cmd in $CMDS; do
-  ln -s busybox $cmd
-done
-cd .. 
-
-# new data module
-tar -cf data.tar \
-  busybox/ \
-  usr/share/doc/busybox-static/copyright
-
-# cleanup
-rm -rf usr/share/doc/busybox-static
-rm -rf busybox
+# symlinks
+ln -s pip3 usr/bin/pip

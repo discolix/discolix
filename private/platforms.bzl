@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-exports_files([
-    "base.yaml",
-    "check_certs.go",
-    "certs.yaml",
-    "debug.yaml",
-    "python.yaml",
-])
+#     ([platform], [os], [arch])
+PLATFORMS = (
+    ("linux_amd64", "linux", "amd64"),
+    ("linux_arm64", "linux", "arm64"),
+    ("linux_arm", "linux", "arm"),
+)

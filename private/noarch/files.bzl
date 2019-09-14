@@ -15,7 +15,7 @@
 NOBODY = 65534
 NONROOT = 65532
 
-def _pad(max_len, text, extra="    "):
+def _pad(max_len, text, extra = "    "):
     pad_spcs = max_len - len(text)
     if pad_spcs <= 0:
         return extra
@@ -32,9 +32,9 @@ def _nsswitch_conf_file_impl(ctx):
 \n"""
     max_len = max([len(key) for key in ctx.attr.entries.keys()])
     data = doc + "".join(["%s:%s%s\n" % (
-        entry[0],  # db name 
-        _pad(max_len, entry[0]), 
-        entry[1]  # db service spec
+        entry[0],  # db name
+        _pad(max_len, entry[0]),
+        entry[1],  # db service spec
     ) for entry in ctx.attr.entries.items()])
     nsswitch_file = ctx.actions.declare_file(ctx.attr.name)
     ctx.actions.write(output = nsswitch_file, content = data)
@@ -69,7 +69,7 @@ BUG_REPORT_URL=\"%s\"\n""" % (
         ctx.attr.home_url,
         ctx.attr.support_url,
         ctx.attr.bug_report_url,
-    ) 
+    )
     release_file = ctx.actions.declare_file(ctx.attr.name)
     ctx.actions.write(output = release_file, content = data)
     return DefaultInfo(files = depset([release_file]))

@@ -8,10 +8,10 @@ project, but with a focus on support for popular ARM platforms.
 
 ## Overview
 
-Discolix is a "distroless" language focused docker image project supporting image
-bundles for the `linux_arm`, `linux_arm64` and `linux_amd64` platforms where the
-`linux_amd64` image being capable of serving as a drop-in replacement for its
-upstream variant (if one exists) and with the additional goal of providing a 
+Discolix is a "distroless" language focused linux docker image project supporting
+image bundles for the `linux_arm`, `linux_arm64` and `linux_amd64` platforms where
+the `linux_amd64` image is capable of serving as a drop-in replacement for its
+upstream variant (if one exists) and with the additional goal of providing a
 foundation for "multi-arch" development using docker.
 
 ## Docker Images
@@ -22,6 +22,7 @@ foundation for "multi-arch" development using docker.
 * `static`
 * `base`
 * `cc`
+* `python`
 
 ### Manifest Lists
 

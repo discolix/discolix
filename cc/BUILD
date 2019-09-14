@@ -15,130 +15,49 @@
 package(default_visibility = ["//visibility:public"])
 
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-
-load("@debian_buster_noarch//debs:deb_packages.bzl", "debian_buster_noarch")
-load("@debian_buster_amd64//debs:deb_packages.bzl", "debian_buster_amd64")
-load("@debian_buster_arm64//debs:deb_packages.bzl", "debian_buster_arm64")
-load("@debian_buster_armhf//debs:deb_packages.bzl", "debian_buster_armhf")
-load("@debian_buster_security_noarch//debs:deb_packages.bzl", "debian_buster_security_noarch")
-load("@debian_buster_security_amd64//debs:deb_packages.bzl", "debian_buster_security_amd64")
-load("@debian_buster_security_arm64//debs:deb_packages.bzl", "debian_buster_security_arm64")
-load("@debian_buster_security_armhf//debs:deb_packages.bzl", "debian_buster_security_armhf")
-
+load("//private:debian_buster.bzl", "debian_buster")
+load("//private:platforms.bzl", "PLATFORMS")
 load("//private/noarch:files.bzl", "NONROOT")
 
 # cc
 
-container_image(
-    name = "amd64",
-    base = "//base:amd64",
+[container_image(
+    name = platform,
+    base = "//base:" + platform,
     debs = [
-        debian_buster_amd64["libgcc1"],
-        debian_buster_amd64["libgomp1"],
-        debian_buster_amd64["libstdc++6"],
+        debian_buster[arch]["libgcc1"],
+        debian_buster[arch]["libgomp1"],
+        debian_buster[arch]["libstdc++6"],
     ],
     stamp = True,
-)
-
-container_image(
-    name = "arm64",
-    base = "//base:arm64",
-    debs = [
-        debian_buster_arm64["libgcc1"],
-        debian_buster_arm64["libgomp1"],
-        debian_buster_arm64["libstdc++6"],
-    ],
-    stamp = True,
-)
-
-container_image(
-    name = "arm",
-    base = "//base:arm",
-    debs = [
-        debian_buster_armhf["libgcc1"],
-        debian_buster_armhf["libgomp1"],
-        debian_buster_armhf["libstdc++6"],
-    ],
-    stamp = True,
-)
+) for (platform, os, arch) in PLATFORMS]
 
 # cc non-root
 
-container_image(
-    name = "nonroot-amd64",
-    base = ":amd64",
+[container_image(
+    name = "nonroot-" + platform,
+    base = ":" + platform,
+    stamp = True,
     user = "%d" % NONROOT,
     workdir = "/home/nonroot",
+) for (platform, os, arch) in PLATFORMS]
+
+# cc debug
+
+[container_image(
+    name = "debug-" + platform,
+    base = ":" + platform,
+    entrypoint = ["/busybox/bin/sh"],
+    layers = ["//private/layer:debug-" + platform],
     stamp = True,
-)
+) for (platform, os, arch) in PLATFORMS]
 
-container_image(
-    name = "nonroot-arm64",
-    base = ":arm64",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
+# cc debug non-root
+
+[container_image(
+    name = "debug-nonroot-" + platform,
+    base = ":nonroot-" + platform,
+    entrypoint = ["/busybox/bin/sh"],
+    layers = ["//private/layer:debug-" + platform],
     stamp = True,
-)
-
-container_image(
-    name = "nonroot-arm",
-    base = ":arm",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
-    stamp = True,
-)
-
-# debug
-
-container_image(
-    name = "debug-amd64",
-    base = ":amd64",
-    layers = ["//private/layers:debug-amd64"],
-    directory = "/",
-    entrypoint = ["/busybox/sh"],
-    stamp = True,
-)
-
-container_image(
-    name = "debug-arm64",
-    base = ":arm64",
-    layers = ["//private/layers:debug-arm64"],
-    directory = "/",
-    entrypoint = ["/busybox/sh"],
-    stamp = True,
-)
-
-container_image(
-    name = "debug-arm",
-    base = ":arm",
-    layers = ["//private/layers:debug-arm"],
-    directory = "/",
-    entrypoint = ["/busybox/sh"],
-    stamp = True,
-)
-
-# debug non-root
-
-container_image(
-    name = "debug-nonroot-amd64",
-    base = ":debug-amd64",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
-    stamp = True,
-)
-
-container_image(
-    name = "debug-nonroot-arm64",
-    base = ":debug-arm64",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
-    stamp = True,
-)
-
-container_image(
-    name = "debug-nonroot-arm",
-    base = ":debug-arm",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
-    stamp = True,
-)
+) for (platform, os, arch) in PLATFORMS]

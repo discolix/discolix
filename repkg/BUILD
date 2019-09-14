@@ -15,6 +15,6 @@
 package(default_visibility = ["//visibility:public"])
 
 sh_binary(
-    name = "repkg",
-    srcs = ["repkg_wrapper.sh"],
+    name = "wrapper",
+    srcs = ["repkg_debs_wrapper.sh"],
 )

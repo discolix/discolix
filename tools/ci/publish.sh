@@ -19,7 +19,12 @@ set -e
 #PROJECT_GIT_BRANCH=  # example: master
 #PROJECT_GIT_COMMIT=  # example: e58a4cd1a5591654442546e68d7ee5e0168b0f84
 
-# only publish master
+if [ -z "$PROJECT_GIT_COMMIT" ]; then
+    echo "PROJECT_GIT_COMMIT not set"
+    exit 1
+fi
+
+# only publish if branch is master
 if [ "$PROJECT_GIT_BRANCH" != "master" ]; then
     exit 0
 fi
@@ -52,7 +57,14 @@ publish_arch_bundle() {
     done
     docker manifest create $manifest $imgs
     for arch in $DISCOLIX_ARCHES; do
-        docker manifest annotate --arch $arch $manifest $prefix$arch
+        if_variant=""
+        if [ $arch = "arm64" ]; then
+            if_variant="--variant v8"
+        fi
+        if [ $arch = "arm" ]; then
+            if_variant="--variant v7"
+        fi
+        docker manifest annotate --arch $arch $if_variant $manifest $prefix$arch
     done
     docker manifest push --purge $manifest
 }
@@ -78,6 +90,12 @@ publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/cc:nonroot" "$PROJECT_REGISTRY_PRE
 publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/cc:debug" "$PROJECT_REGISTRY_PREFIX/cc:debug-linux_"
 publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/cc:debug-nonroot" "$PROJECT_REGISTRY_PREFIX/cc:debug-nonroot-linux_"
 
+# publish python manifest bundles
+publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/python:$PROJECT_GIT_COMMIT" "$PROJECT_REGISTRY_PREFIX/python:$PROJECT_GIT_COMMIT-linux_"
+publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/python:nonroot" "$PROJECT_REGISTRY_PREFIX/python:nonroot-linux_"
+publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/python:debug" "$PROJECT_REGISTRY_PREFIX/python:debug-linux_"
+publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/python:debug-nonroot" "$PROJECT_REGISTRY_PREFIX/python:debug-nonroot-linux_"
+
 # publish static latest manifest bundle
 retag_arch_bundle "$PROJECT_REGISTRY_PREFIX/static:$PROJECT_GIT_COMMIT-linux_" "$PROJECT_REGISTRY_PREFIX/static:latest-linux_"
 publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/static:latest" "$PROJECT_REGISTRY_PREFIX/static:latest-linux_"
@@ -89,6 +107,10 @@ publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/base:latest" "$PROJECT_REGISTRY_PR
 # publish cc latest manifest bundle
 retag_arch_bundle "$PROJECT_REGISTRY_PREFIX/cc:$PROJECT_GIT_COMMIT-linux_" "$PROJECT_REGISTRY_PREFIX/cc:latest-linux_"
 publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/cc:latest" "$PROJECT_REGISTRY_PREFIX/cc:latest-linux_"
+
+# publish python latest manifest bundle
+retag_arch_bundle "$PROJECT_REGISTRY_PREFIX/python:$PROJECT_GIT_COMMIT-linux_" "$PROJECT_REGISTRY_PREFIX/python:latest-linux_"
+publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/python:latest" "$PROJECT_REGISTRY_PREFIX/python:latest-linux_"
 
 # push any changes to the build image
 docker tag $PROJECT_REGISTRY_PREFIX/build:latest $PROJECT_REGISTRY_PREFIX/build:$PROJECT_GIT_COMMIT

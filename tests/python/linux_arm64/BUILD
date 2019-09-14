@@ -15,44 +15,15 @@
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
-load("@io_bazel_rules_go//go:def.bzl", "go_binary")
-
-# base
-
-container_test(
-    name = "base",
-    configs = ["//tests:base.yaml"],
-    image = "//base:amd64",
-    size = "small",
-)
-
-go_binary(
-    name = "check_certs",
-    srcs = ["//tests:check_certs.go"],
-    goos = "linux",
-    goarch = "amd64",
-    pure = "on",
-)
-
 container_image(
-    name = "check_certs_image",
-    base = "//base:amd64",
-    files = [":check_certs"],
-    visibility = ["//visibility:private"],
+    name = "python_test_image",
+    base = "//python:linux_arm64",
+    layers = ["//private/layer:qemu-static"],
 )
 
 container_test(
-    name = "certs",
-    configs = ["//tests:certs.yaml"],
-    image = ":check_certs_image",
-    size = "small",
-)
-
-# debug
-
-container_test(
-    name = "debug",
-    configs = ["//tests:debug.yaml"],
-    image = "//base:debug-amd64",
-    size = "small",
+    name = "python",
+    size = "large",
+    configs = ["//tests:python.yaml"],
+    image = ":python_test_image",
 )

@@ -12,10 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-exports_files([
-    "base.yaml",
-    "check_certs.go",
-    "certs.yaml",
-    "debug.yaml",
-    "python.yaml",
-])
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
+
+container_image(
+    name = "python_test_image",
+    base = "//python:linux_arm",
+    layers = ["//private/layer:qemu-static"],
+)
+
+container_test(
+    name = "python",
+    size = "large",
+    configs = ["//tests:python.yaml"],
+    image = ":python_test_image",
+)

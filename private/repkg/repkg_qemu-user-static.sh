@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Copyright 2019 Erik Maciejewski
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,10 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-exports_files([
-    "base.yaml",
-    "check_certs.go",
-    "certs.yaml",
-    "debug.yaml",
-    "python.yaml",
-])
+# grab what we need
+cp usr/bin/qemu-aarch64-static .
+cp usr/bin/qemu-arm-static .
+
+# discard all in usr/ except copyright
+find usr -not -name 'copyright' -delete >/dev/null 2>&1 || true
+
+mkdir usr/bin
+cp qemu-aarch64-static usr/bin/
+cp qemu-arm-static usr/bin/

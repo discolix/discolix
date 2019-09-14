@@ -14,14 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-tar -xf $REPKG_DEB_DATA_MODULE ./usr/share/doc/ca-certificates/copyright
-tar -xf $REPKG_DEB_DATA_MODULE ./usr/share/ca-certificates
-
-# We'll create a new data.tar.xz with flattened certs and
-# the copyright
-rm $REPKG_DEB_DATA_MODULE
-
-# Concat all the certs.
+# concat all the certs.
 CERT_FILE=./etc/ssl/certs/ca-certificates.crt
 mkdir -p $(dirname $CERT_FILE)
 
@@ -30,9 +23,5 @@ for cert in $CERTS; do
   cat $cert >> $CERT_FILE
 done
 
-tar -cf data.tar \
-  etc/ \
-  usr/share/doc/ca-certificates/copyright
-
-rm -rf usr/share/ca-certificates
-rm -rf etc/ssl/certs/ca-certificate.crt
+# discard all in usr/ except copyright
+find usr -not -name 'copyright' -delete >/dev/null 2>&1 || true

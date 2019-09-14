@@ -15,179 +15,68 @@
 package(default_visibility = ["//visibility:public"])
 
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-
-load("@debian_buster_noarch//debs:deb_packages.bzl", "debian_buster_noarch")
-load("@debian_buster_amd64//debs:deb_packages.bzl", "debian_buster_amd64")
-load("@debian_buster_arm64//debs:deb_packages.bzl", "debian_buster_arm64")
-load("@debian_buster_armhf//debs:deb_packages.bzl", "debian_buster_armhf")
-load("@debian_buster_security_noarch//debs:deb_packages.bzl", "debian_buster_security_noarch")
-load("@debian_buster_security_amd64//debs:deb_packages.bzl", "debian_buster_security_amd64")
-load("@debian_buster_security_arm64//debs:deb_packages.bzl", "debian_buster_security_arm64")
-load("@debian_buster_security_armhf//debs:deb_packages.bzl", "debian_buster_security_armhf")
-
+load("//private:debian_buster.bzl", "debian_buster")
+load("//private:platforms.bzl", "PLATFORMS")
 load("//private/noarch:files.bzl", "NONROOT")
 
 # static
 
-container_image(
-    name = "static-amd64",
-    layers = ["//private/layers:root-amd64"],
-    tars = ["//private/noarch:base-files"],
+[container_image(
+    name = "static-" + platform,
+    layers = ["//private/layer:root-" + platform],
     stamp = True,
-)
-
-container_image(
-    name = "static-arm64",
-    layers = ["//private/layers:root-arm64"],
     tars = ["//private/noarch:base-files"],
-    stamp = True,
-)
-
-container_image(
-    name = "static-arm",
-    layers = ["//private/layers:root-arm"],
-    tars = ["//private/noarch:base-files"],
-    stamp = True,
-)
+) for (platform, os, arch) in PLATFORMS]
 
 # static non-root
 
-container_image(
-    name = "static-nonroot-amd64",
-    base = ":static-amd64",
+[container_image(
+    name = "static-nonroot-" + platform,
+    base = ":static-" + platform,
+    stamp = True,
     user = "%d" % NONROOT,
     workdir = "/home/nonroot",
-    stamp = True,
-)
-
-container_image(
-    name = "static-nonroot-arm64",
-    base = ":static-arm64",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
-    stamp = True,
-)
-
-container_image(
-    name = "static-nonroot-arm",
-    base = ":static-arm",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
-    stamp = True,
-)
+) for (platform, os, arch) in PLATFORMS]
 
 # base
 
-container_image(
-    name = "amd64",
-    base = ":static-amd64",
+[container_image(
+    name = platform,
+    base = ":static-" + platform,
     debs = [
-        debian_buster_amd64["libc6"],
-        debian_buster_amd64["libssl1.1"],
-        debian_buster_amd64["openssl"],
+        debian_buster[arch]["libc6"],
+        debian_buster[arch]["libssl1.1"],
+        debian_buster[arch]["openssl"],
     ],
     stamp = True,
-)
-
-container_image(
-    name = "arm64",
-    base = ":static-arm64",
-    debs = [
-        debian_buster_arm64["libc6"],
-        debian_buster_arm64["libssl1.1"],
-        debian_buster_arm64["openssl"],
-    ],
-    stamp = True,
-)
-
-container_image(
-    name = "arm",
-    base = ":static-arm",
-    debs = [
-        debian_buster_armhf["libc6"],
-        debian_buster_armhf["libssl1.1"],
-        debian_buster_armhf["openssl"],
-    ],
-    stamp = True,
-)
+) for (platform, os, arch) in PLATFORMS]
 
 # base non-root
 
-container_image(
-    name = "nonroot-amd64",
-    base = ":amd64",
+[container_image(
+    name = "nonroot-" + platform,
+    base = ":" + platform,
+    stamp = True,
     user = "%d" % NONROOT,
     workdir = "/home/nonroot",
+) for (platform, os, arch) in PLATFORMS]
+
+# base debug
+
+[container_image(
+    name = "debug-" + platform,
+    base = ":" + platform,
+    entrypoint = ["/busybox/bin/sh"],
+    layers = ["//private/layer:debug-" + platform],
     stamp = True,
-)
+) for (platform, os, arch) in PLATFORMS]
 
-container_image(
-    name = "nonroot-arm64",
-    base = ":arm64",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
+# base debug non-root
+
+[container_image(
+    name = "debug-nonroot-" + platform,
+    base = ":nonroot-" + platform,
+    entrypoint = ["/busybox/bin/sh"],
+    layers = ["//private/layer:debug-" + platform],
     stamp = True,
-)
-
-container_image(
-    name = "nonroot-arm",
-    base = ":arm",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
-    stamp = True,
-)
-
-# debug
-
-container_image(
-    name = "debug-amd64",
-    base = ":amd64",
-    layers = ["//private/layers:debug-amd64"],
-    directory = "/",
-    entrypoint = ["/busybox/sh"],
-    stamp = True,
-)
-
-container_image(
-    name = "debug-arm64",
-    base = ":arm64",
-    layers = ["//private/layers:debug-arm64"],
-    directory = "/",
-    entrypoint = ["/busybox/sh"],
-    stamp = True,
-)
-
-container_image(
-    name = "debug-arm",
-    base = ":arm",
-    layers = ["//private/layers:debug-arm"],
-    directory = "/",
-    entrypoint = ["/busybox/sh"],
-    stamp = True,
-)
-
-# debug non-root
-
-container_image(
-    name = "debug-nonroot-amd64",
-    base = ":debug-amd64",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
-    stamp = True,
-)
-
-container_image(
-    name = "debug-nonroot-arm64",
-    base = ":debug-arm64",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
-    stamp = True,
-)
-
-container_image(
-    name = "debug-nonroot-arm",
-    base = ":debug-arm",
-    user = "%d" % NONROOT,
-    workdir = "/home/nonroot",
-    stamp = True,
-)
+) for (platform, os, arch) in PLATFORMS]

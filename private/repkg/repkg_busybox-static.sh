@@ -13,23 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+CMDS=$1
 
-IN_DEB=$1
-OUT_TAR=$2
-OUT_DEB=$3
-SCRIPT=$4
-PASSTHRU=$5
+# generate command symlinks to busybox executable
+pushd bin 2>&1 >/dev/null
+for cmd in $CMDS; do
+  ln -s busybox $cmd
+done
+popd 2>&1 >/dev/null
 
-# use the input deb as the template for the output deb
-cp "$IN_DEB" "$OUT_DEB"
-# extract data module from deb to repackage
-ar -x "$IN_DEB" data.tar.xz
-# execute repackaging script
-export REPKG_DEB_DATA_MODULE=data.tar.xz
-$SCRIPT "$PASSTHRU"
-# delete old data module from output deb
-ar -d "$OUT_DEB" data.tar.xz
-# add our repackaged data module to output deb
-ar -r "$OUT_DEB" data.tar
-mv data.tar "$OUT_TAR"
+# discard all in usr/ except copyright
+find usr -not -name 'copyright' -delete >/dev/null 2>&1 || true

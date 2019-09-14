@@ -12,30 +12,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def _deb_impl(ctx):
+def _debs_impl(ctx):
+    name = str(ctx.label).split(":")[1]
+    debs = " ".join([f.path for f in ctx.files.debs])
     ctx.actions.run(
         executable = ctx.executable._wrapper,
         arguments = [
-            ctx.file.deb.path,
+            name,
+            debs,
             ctx.outputs.tar.path,
             ctx.outputs.deb.path,
             ctx.file.script.path,
             ctx.attr.args,
         ],
         inputs = [
-            ctx.file.script, 
-            ctx.file.deb
-        ],
+            ctx.file.script,
+        ] + ctx.files.debs,
         outputs = [
-            ctx.outputs.tar, 
-            ctx.outputs.deb
+            ctx.outputs.tar,
+            ctx.outputs.deb,
         ],
     )
 
-_repkg_deb = rule(
+_repkg_debs = rule(
     attrs = {
-        "deb": attr.label(
-            allow_single_file = [".deb"],
+        "debs": attr.label_list(
+            allow_files = [".deb"],
             mandatory = True,
         ),
         "script": attr.label(
@@ -44,7 +46,7 @@ _repkg_deb = rule(
         ),
         "args": attr.string(),
         "_wrapper": attr.label(
-            default = Label("@com_github_discolix_discolix//repkg"),
+            default = Label("@com_github_discolix_discolix//repkg:wrapper"),
             cfg = "host",
             executable = True,
             allow_files = True,
@@ -55,8 +57,8 @@ _repkg_deb = rule(
         "tar": "%{name}.tar",
         "deb": "%{name}.deb",
     },
-    implementation = _deb_impl,
+    implementation = _debs_impl,
 )
 
-def repkg_deb(**kwargs):
-    _repkg_deb(**kwargs)
+def repkg_debs(**kwargs):
+    _repkg_debs(**kwargs)
