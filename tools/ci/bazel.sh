@@ -19,8 +19,13 @@ if [ -z "$PROJECT_BUILD_FQIN" ]; then
     PROJECT_BUILD_FQIN=$DEFAULT_BUILD_FQIN
 fi
 
+if [ -z "$PROJECT_REGISTRY_PREFIX" ]; then
+    PROJECT_REGISTRY_PREFIX="discolix"
+fi
+
 docker run --rm \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v $PWD:/build \
     -w /build \
+    -e PROJECT_REGISTRY_PREFIX=$PROJECT_REGISTRY_PREFIX \
     $PROJECT_BUILD_FQIN bazel --bazelrc=tools/ci/.bazelrc $@

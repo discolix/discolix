@@ -90,15 +90,3 @@ container_bundle(
         "{PROJECT_REGISTRY_PREFIX}/python:debug-nonroot-linux_arm": "//python:debug-nonroot-linux_arm",
     },
 )
-
-# project refactor breaks the current version of this utility
-
-#load("//private:deb_package_helper.bzl", "update_deb_packages")
-
-#update_deb_packages(
-#    name = "update_deb_packages",
-#   pgp_keys = [
-#        "@buster_archive_key//file",
-#        "@buster_archive_security_key//file",
-#    ],
-#)

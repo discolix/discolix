@@ -23,7 +23,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 # install bazel
-ENV INSTALL_BAZEL_VERSION=0.29.1
+ENV INSTALL_BAZEL_VERSION=1.2.0
 RUN curl -L https://github.com/bazelbuild/bazel/releases/download/${INSTALL_BAZEL_VERSION}/bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh \
         -o bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     chmod +x bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
@@ -33,7 +33,7 @@ RUN curl -L https://github.com/bazelbuild/bazel/releases/download/${INSTALL_BAZE
 FROM build as devel
 RUN echo 'PS1="\[$(tput setaf 3)$(tput bold)[\]devel@\\h:\\W]#\[$(tput sgr0) \]"' >> /root/.bashrc
 # install go tools (non-bazel)
-ENV INSTALL_GO_VERSION=1.12.7 \
+ENV INSTALL_GO_VERSION=1.13.4 \
     PATH="$PATH:/usr/local/go/bin:/go/bin" \
     GOPATH="/go"
 RUN curl -L https://dl.google.com/go/go${INSTALL_GO_VERSION}.linux-amd64.tar.gz \

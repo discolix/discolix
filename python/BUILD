@@ -16,7 +16,7 @@ package(default_visibility = ["//visibility:public"])
 
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("//repkg:defs.bzl", "repkg_debs")
-load("//private:debian_buster.bzl", "debian_buster")
+load("//private:debian_buster.bzl", "debian_buster", "debian_buster_security")
 load("//private:platforms.bzl", "PLATFORMS")
 load("//private/noarch:files.bzl", "NONROOT")
 
@@ -37,8 +37,8 @@ load("//private/noarch:files.bzl", "NONROOT")
     name = platform,
     base = "//cc:" + platform,
     debs = [
-        debian_buster[arch]["libexpat1"],
         debian_buster[arch]["zlib1g"],
+        debian_buster_security[arch]["libexpat1"],
         # libpython3.7-stdlib deps
         debian_buster[arch]["dash"],
         debian_buster[arch]["libbz2-1.0"],

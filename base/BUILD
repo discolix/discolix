@@ -15,7 +15,7 @@
 package(default_visibility = ["//visibility:public"])
 
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("//private:debian_buster.bzl", "debian_buster")
+load("//private:debian_buster.bzl", "debian_buster", "debian_buster_security")
 load("//private:platforms.bzl", "PLATFORMS")
 load("//private/noarch:files.bzl", "NONROOT")
 
@@ -45,8 +45,8 @@ load("//private/noarch:files.bzl", "NONROOT")
     base = ":static-" + platform,
     debs = [
         debian_buster[arch]["libc6"],
-        debian_buster[arch]["libssl1.1"],
-        debian_buster[arch]["openssl"],
+        debian_buster_security[arch]["libssl1.1"],
+        debian_buster_security[arch]["openssl"],
     ],
     stamp = True,
 ) for (platform, os, arch) in PLATFORMS]
