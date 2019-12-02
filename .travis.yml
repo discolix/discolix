@@ -12,13 +12,12 @@ env:
     - PROJECT_GIT_COMMIT=$TRAVIS_COMMIT
 install:
   - sudo apt-get update
-  - sudo apt-get install -y qemu-user qemu-user-static
+  - sudo apt-get install -y qemu-user qemu-user-static jq
   - docker pull discolix/build || true
   - docker tag discolix/build discolix/build:cache || true
   - echo ".bazel" > .dockerignore
   - docker build --cache-from discolix/build:cache --target build -t discolix/build -f tools/docker/Dockerfile .
   - rm .dockerignore
 script:
-  - tools/ci/bazel.sh build //...
   - tools/ci/bazel.sh test //...
   - tools/ci/publish.sh

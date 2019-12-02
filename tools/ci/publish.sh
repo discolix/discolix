@@ -48,6 +48,10 @@ publish_arch_bundle() {
     local manifest=$1; local prefix=$2
     # push arch image bundle
     for arch in $DISCOLIX_ARCHES; do
+        # quick and dirty image arch metadata fix for arm images
+        if [ $arch = "arm64" ] || [ $arch = "arm" ]; then
+            tools/ci/image_arch_fix.sh $prefix$arch linux_$arch
+        fi
         docker push $prefix$arch
     done
     # create and push manifest for arch image bundle
