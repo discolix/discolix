@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""re-package deb packages"""
+
 def _debs_impl(ctx):
     name = str(ctx.label).split(":")[1]
     debs = " ".join([f.path for f in ctx.files.debs])

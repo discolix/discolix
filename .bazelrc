@@ -12,8 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# per rules_docker
-# https://github.com/bazelbuild/rules_docker
-build --host_force_python=PY2
-
 build --workspace_status_command=/proc/self/cwd/tools/wsc.sh

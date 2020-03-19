@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//:discolix_all"])
-
 load("@io_bazel_rules_docker//container:container.bzl", "container_layer")
 load("//private:debian_buster.bzl", "debian_buster")
 load("//private:platforms.bzl", "PLATFORMS")
+
+package(default_visibility = ["//:discolix_all"])
 
 # root layer
 

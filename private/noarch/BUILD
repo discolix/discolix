@@ -13,13 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//:discolix_all"])
-
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("@io_bazel_rules_docker//contrib:passwd.bzl", "passwd_entry", "passwd_tar")
 load("@io_bazel_rules_docker//contrib:group.bzl", "group_entry", "group_file")
-
 load(":files.bzl", "nsswitch_conf_file", "os_release_file", "NOBODY", "NONROOT")
+
+package(default_visibility = ["//:discolix_all"])
 
 # create root, nonroot and nobody users
 passwd_entry(

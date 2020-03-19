@@ -16,30 +16,13 @@ workspace(name = "com_github_discolix_discolix")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 
-# rules_go
-# https://github.com/bazelbuild/rules_go
-http_archive(
-    name = "io_bazel_rules_go",
-    sha256 = "b9aa86ec08a292b97ec4591cf578e020b35f98e12173bbd4a921f84f583aebd9",
-    urls = [
-        "https://storage.googleapis.com/bazel-mirror/github.com/bazelbuild/rules_go/releases/download/v0.20.2/rules_go-v0.20.2.tar.gz",
-        "https://github.com/bazelbuild/rules_go/releases/download/v0.20.2/rules_go-v0.20.2.tar.gz",
-    ],
-)
-
-load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-
-go_rules_dependencies()
-
-go_register_toolchains()
-
 # rules_docker
 # https://github.com/bazelbuild/rules_docker
 http_archive(
     name = "io_bazel_rules_docker",
-    sha256 = "14ac30773fdb393ddec90e158c9ec7ebb3f8a4fd533ec2abbfd8789ad81a284b",
-    strip_prefix = "rules_docker-0.12.1",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.12.1/rules_docker-v0.12.1.tar.gz"],
+    sha256 = "dc97fccceacd4c6be14e800b2a00693d5e8d07f69ee187babfd04a80a9f8e250",
+    strip_prefix = "rules_docker-0.14.1",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.14.1/rules_docker-v0.14.1.tar.gz"],
 )
 
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repos = "repositories")
@@ -93,7 +76,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u2_amd64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u3_amd64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_amd64.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_amd64.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_amd64.deb",
@@ -105,18 +88,18 @@ deb_packages(
         "liblzma5": "pool/main/x/xz-utils/liblzma5_5.2.4-1_amd64.deb",
         "libmpdec2": "pool/main/m/mpdecimal/libmpdec2_2.4.2-2_amd64.deb",
         "libncursesw6": "pool/main/n/ncurses/libncursesw6_6.1+20181013-2+deb10u2_amd64.deb",
-        "libpython3.7-minimal": "pool/main/p/python3.7/libpython3.7-minimal_3.7.3-2_amd64.deb",
-        "libpython3.7-stdlib": "pool/main/p/python3.7/libpython3.7-stdlib_3.7.3-2_amd64.deb",
+        "libpython3.7-minimal": "pool/main/p/python3.7/libpython3.7-minimal_3.7.3-2+deb10u1_amd64.deb",
+        "libpython3.7-stdlib": "pool/main/p/python3.7/libpython3.7-stdlib_3.7.3-2+deb10u1_amd64.deb",
         "libreadline7": "pool/main/r/readline/libreadline7_7.0-5_amd64.deb",
         "libsqlite3-0": "pool/main/s/sqlite3/libsqlite3-0_3.27.2-3_amd64.deb",
         "libstdc++6": "pool/main/g/gcc-8/libstdc++6_8.3.0-6_amd64.deb",
         "libtinfo6": "pool/main/n/ncurses/libtinfo6_6.1+20181013-2+deb10u2_amd64.deb",
         "libuuid1": "pool/main/u/util-linux/libuuid1_2.33.1-0.1_amd64.deb",
-        "python3.7-minimal": "pool/main/p/python3.7/python3.7-minimal_3.7.3-2_amd64.deb",
+        "python3.7-minimal": "pool/main/p/python3.7/python3.7-minimal_3.7.3-2+deb10u1_amd64.deb",
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_amd64.deb",
     },
     packages_sha256 = {
-        "base-files": "a44ece5e929b483ca8950bd20dc936d58171d787eb9520400941793847f222f7",
+        "base-files": "d6c28487ab6e32d6be7dcd17ac994045dd09d80da3ea3eac9afad2af6a00793b",
         "busybox-static": "5a5f13e56389356a73d4e4eed2156b227f8be269ce4c2dcfe291484ea2fda625",
         "dash": "e4872d9f258e76665317c94c637b4270dc1c15c9cf42da90dbfde0225c7f4564",
         "libbz2-1.0": "238193cbaa71cc5365ef2aa5ad45de8521ac38dd54f4ab53bafa7de15046fa89",
@@ -128,14 +111,14 @@ deb_packages(
         "liblzma5": "292dfe85defad3a08cca62beba85e90b0231d16345160f4a66aba96399c85859",
         "libmpdec2": "9ca85e6e2645a5e660431294320658ec7a2910d9fed90ca4e648c1211a2b844b",
         "libncursesw6": "7dffe9602586300292960f2e3cf4301acfc64a91aed6fa41ea2e719ae75788b3",
-        "libpython3.7-minimal": "f3527459b27ab76f7373907af2b239fb18592a30e60626f9cc40341d7c6c5e3e",
-        "libpython3.7-stdlib": "7f8c1a6e574c3760a0c7a624fa96d68f927d0345393a5ccc28903fa7387788f9",
+        "libpython3.7-minimal": "b3d45767c2f6ff022bc76f9a1bedd445f7e90584f844e459604c856d91193fdd",
+        "libpython3.7-stdlib": "993d6e8bad12cea70257c96f2f76f1c4a5afe7506992971dd9b6924fcb924657",
         "libreadline7": "01e99d68427722e64c603d45f00063c303b02afb53d85c8d1476deca70db64c6",
         "libsqlite3-0": "ff247b1c0527cc7322af8d47260268db079e94284ee12352b31be912d30ce2a1",
         "libstdc++6": "5cc70625329655ff9382580971d4616db8aa39af958b7c995ee84598f142a4ee",
         "libtinfo6": "7f39c7a7b02c3373a427aa276830a6e1e0c4cc003371f34e2e50e9992aa70e1a",
         "libuuid1": "90b90bef4593d4f347fb1e74a63c5609daa86d4c5003b14e85f58628d6c118b2",
-        "python3.7-minimal": "1f6fdc0cc76c91de2196df228ea8f613d8b179c62d1be72f4b0a6d77ea746c71",
+        "python3.7-minimal": "b5501e882d51b5f39c0d2858750a4d479072b24cd48adfbd42727331abb3426d",
         "zlib1g": "61bc9085aadd3007433ce6f560a08446a3d3ceb0b5e061db3fc62c42fbfe3eff",
     },
     pgp_key = "buster_archive_key",
@@ -151,13 +134,13 @@ deb_packages(
         "libexpat1": "pool/updates/main/e/expat/libexpat1_2.2.6-2+deb10u1_amd64.deb",
         "libssl1.1": "pool/updates/main/o/openssl/libssl1.1_1.1.1d-0+deb10u2_amd64.deb",
         "openssl": "pool/updates/main/o/openssl/openssl_1.1.1d-0+deb10u2_amd64.deb",
-        "qemu-user-static": "pool/updates/main/q/qemu/qemu-user-static_3.1+dfsg-8+deb10u3_amd64.deb",
+        "qemu-user-static": "pool/updates/main/q/qemu/qemu-user-static_3.1+dfsg-8+deb10u4_amd64.deb",
     },
     packages_sha256 = {
         "libexpat1": "d60dee1f402ee0fba6d44df584512ae9ede73e866048e8476de55d9b78fa2da1",
         "libssl1.1": "31c15130e0e4b2c907ef7cd92e50be23320a22c0c3b54e130b5258fe6bd8df2d",
         "openssl": "66737f435331e6c535fd0b666fd2b100a0e2ed180188c632b39a6aa904c31ef3",
-        "qemu-user-static": "426beb17aa44e206ff264d5a28abbbbbb4aa1728daac694d1f1404582f501874",
+        "qemu-user-static": "65a9902ff1f80affa5827c5d7b2bdc407a11ac2136114add1af05a60e5e08ae6",
     },
     pgp_key = "buster_archive_security_key",
 )
@@ -169,7 +152,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u2_arm64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u3_arm64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_arm64.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_arm64.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_arm64.deb",
@@ -181,18 +164,18 @@ deb_packages(
         "liblzma5": "pool/main/x/xz-utils/liblzma5_5.2.4-1_arm64.deb",
         "libmpdec2": "pool/main/m/mpdecimal/libmpdec2_2.4.2-2_arm64.deb",
         "libncursesw6": "pool/main/n/ncurses/libncursesw6_6.1+20181013-2+deb10u2_arm64.deb",
-        "libpython3.7-minimal": "pool/main/p/python3.7/libpython3.7-minimal_3.7.3-2_arm64.deb",
-        "libpython3.7-stdlib": "pool/main/p/python3.7/libpython3.7-stdlib_3.7.3-2_arm64.deb",
+        "libpython3.7-minimal": "pool/main/p/python3.7/libpython3.7-minimal_3.7.3-2+deb10u1_arm64.deb",
+        "libpython3.7-stdlib": "pool/main/p/python3.7/libpython3.7-stdlib_3.7.3-2+deb10u1_arm64.deb",
         "libreadline7": "pool/main/r/readline/libreadline7_7.0-5_arm64.deb",
         "libsqlite3-0": "pool/main/s/sqlite3/libsqlite3-0_3.27.2-3_arm64.deb",
         "libstdc++6": "pool/main/g/gcc-8/libstdc++6_8.3.0-6_arm64.deb",
         "libtinfo6": "pool/main/n/ncurses/libtinfo6_6.1+20181013-2+deb10u2_arm64.deb",
         "libuuid1": "pool/main/u/util-linux/libuuid1_2.33.1-0.1_arm64.deb",
-        "python3.7-minimal": "pool/main/p/python3.7/python3.7-minimal_3.7.3-2_arm64.deb",
+        "python3.7-minimal": "pool/main/p/python3.7/python3.7-minimal_3.7.3-2+deb10u1_arm64.deb",
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_arm64.deb",
     },
     packages_sha256 = {
-        "base-files": "9a49c359764fd7a2f33f32acf0234b9b15ec07e7f83fb67b4ff010dc34832752",
+        "base-files": "c742af026c308ca422bd9607696451f4883873925417ca35a529635947918fdf",
         "busybox-static": "253b6111898747d64c20aa255c20f5d1bbd3e9547e38bb12a550cd1ca5793e36",
         "dash": "63d948ae0479c25652798cb072ecb4a24ab281cda477224773f033b570760058",
         "libbz2-1.0": "759f72ebadc1c8a790a1260c29d40736d0ebc2ee1a4e003ea70704631b42614e",
@@ -204,14 +187,14 @@ deb_packages(
         "liblzma5": "a0e05b73ef039aac46b5d1ddab5c35e60561424238152e363e7319958dd4b814",
         "libmpdec2": "72638348c7faeccd51d75e7bba75748c319a2240734e3577a06d9d0e210a7c35",
         "libncursesw6": "da4dc6c68aecff023f614ce84355291486b72068e6e0bf7b27d16b78361b162b",
-        "libpython3.7-minimal": "c9b105dc85e5f84f5810f0d858f04139d2a8b5897b58fa27c2fb2573e22b1e0e",
-        "libpython3.7-stdlib": "9a75bffa95eea95d7ff64e68700ea443620424371a5722d4049aaf50b0bead50",
+        "libpython3.7-minimal": "2213c5484422edbf15ccff5112c9db6fb32c1a1ab81992f73e0444bfb7288476",
+        "libpython3.7-stdlib": "8f3fea6a305e4981500ce1a37bd4af42eeb81e886eee61232274128bea745c50",
         "libreadline7": "2c11b5542b1d9ef224fccb08e0c3e6a1b27e083320aede9620822f60a161e1f7",
         "libsqlite3-0": "dc640195d3a2958f04f78b3bc8835ea0ca0105c12c179571555616b3b4e4a59f",
         "libstdc++6": "52cf36333a405867a079a695f6a37cb63558859d7d19cef40fc7d112c39fefd6",
         "libtinfo6": "1b0533fcee638b5c76a07fb6ce3a64e6cb67d5e81574d6541486c0b2130430d5",
         "libuuid1": "28d3a69bae1bdc9185e70d97214773a563a7f8a72682b2deef394a4f7c9c79b8",
-        "python3.7-minimal": "2ee74e608a9a27b06aeed8f471f95e98a4fb2e0b0985b19a83a052ca992d984d",
+        "python3.7-minimal": "fe07ae1c4b8d877a4cf7ae221f3463d4d380d8df795f7503b91cd0ad87817ba2",
         "zlib1g": "1fa65d3ae86bf52d86ad523520d0d88711ec351b5f75be1bfe477bbaf48d3f42",
     },
     pgp_key = "buster_archive_key",
@@ -243,7 +226,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u2_armhf.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u3_armhf.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_armhf.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_armhf.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_armhf.deb",
@@ -255,18 +238,18 @@ deb_packages(
         "liblzma5": "pool/main/x/xz-utils/liblzma5_5.2.4-1_armhf.deb",
         "libmpdec2": "pool/main/m/mpdecimal/libmpdec2_2.4.2-2_armhf.deb",
         "libncursesw6": "pool/main/n/ncurses/libncursesw6_6.1+20181013-2+deb10u2_armhf.deb",
-        "libpython3.7-minimal": "pool/main/p/python3.7/libpython3.7-minimal_3.7.3-2_armhf.deb",
-        "libpython3.7-stdlib": "pool/main/p/python3.7/libpython3.7-stdlib_3.7.3-2_armhf.deb",
+        "libpython3.7-minimal": "pool/main/p/python3.7/libpython3.7-minimal_3.7.3-2+deb10u1_armhf.deb",
+        "libpython3.7-stdlib": "pool/main/p/python3.7/libpython3.7-stdlib_3.7.3-2+deb10u1_armhf.deb",
         "libreadline7": "pool/main/r/readline/libreadline7_7.0-5_armhf.deb",
         "libsqlite3-0": "pool/main/s/sqlite3/libsqlite3-0_3.27.2-3_armhf.deb",
         "libstdc++6": "pool/main/g/gcc-8/libstdc++6_8.3.0-6_armhf.deb",
         "libtinfo6": "pool/main/n/ncurses/libtinfo6_6.1+20181013-2+deb10u2_armhf.deb",
         "libuuid1": "pool/main/u/util-linux/libuuid1_2.33.1-0.1_armhf.deb",
-        "python3.7-minimal": "pool/main/p/python3.7/python3.7-minimal_3.7.3-2_armhf.deb",
+        "python3.7-minimal": "pool/main/p/python3.7/python3.7-minimal_3.7.3-2+deb10u1_armhf.deb",
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_armhf.deb",
     },
     packages_sha256 = {
-        "base-files": "0d8b3bd12fbcb50fbfdba750c6e381766b1e8ac9ced4bdaecb321500d75cb5cd",
+        "base-files": "8614d3dd0aeb535d755f992693c5d207c9576cf2f1f598ebe6b4bb444e852047",
         "busybox-static": "ea1ee96420013d8404d677a81c92eb54adbf58852ffaa6722a39245025157304",
         "dash": "4287aa31a5c1d9e32f077e90194b37f5d9af326630248c4a3df83c5d3965f219",
         "libbz2-1.0": "4401482dad1f11e370b0d47078b0eef74593d3b12badd8d4277a1c448ab2de15",
@@ -278,14 +261,14 @@ deb_packages(
         "liblzma5": "07d901230e1fafd740ce2f26e7bf9e564ff6669c269841d6fa48ccbf997e2547",
         "libmpdec2": "ec441279854d5bacc0e5eec5601040bbd20e10999ac0ac13d768c5db3885cd59",
         "libncursesw6": "984cd005ad6edf2792f383973d4f8d9bb3aae81ebd35287b62806faf37bf222a",
-        "libpython3.7-minimal": "2e6cbc1e2c914ea9b07811662bda053b36fe5504186c143bba67316e273235f9",
-        "libpython3.7-stdlib": "579dc6a76a0650162ecaa578b5133f645886beb128fb66e4ab5333eb94b3f29e",
+        "libpython3.7-minimal": "41f0915ef8b5b019d44bbfc3e7c4d17b62e1baa63f1d6cf3ebe5f0d19a3a212d",
+        "libpython3.7-stdlib": "1028ea6cac5cf5cb17752288674162ec67873122ff4f9c0c76f8d1e8e2fd2e82",
         "libreadline7": "de3aa01b6ecfa5b57e5011e400abddf9174056588c21b42189b497e65a67d983",
         "libsqlite3-0": "cd7040cec8f05f06c40afea3d3e857890d9fd96ee4aecf61c8c7c0cf72d23004",
         "libstdc++6": "2a22648689ca745554599a818f01241605b2548540d62026116cb07a15df8d09",
         "libtinfo6": "5bb6e9c2dab2309dcd0f0d9d9990f21404032c1082a9bd2b127e13e085592f72",
         "libuuid1": "4bde8f620a8a1e818223ed702478afa836d5bb119a4750bc6795ab67b8cb3589",
-        "python3.7-minimal": "5e3ca34aacca1d17614236d2ab8ed553fbdbbe41a68d7c75dcd1e2e2f388d071",
+        "python3.7-minimal": "9ec3d061d67d70ca6bab352c61f6824d08b09fb6142eea411fd3bc6b7ff0d80a",
         "zlib1g": "c4e5a709233034080b5f8ec7b73c83f26fc8e921326e926aef4a22a6d07415ac",
     },
     pgp_key = "buster_archive_key",

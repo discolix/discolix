@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//:discolix_all"])
-
 load("//repkg:defs.bzl", "repkg_debs")
 load("//private:debian_buster.bzl", "debian_buster", "debian_buster_security")
 load("//private:platforms.bzl", "PLATFORMS")
 load(":busybox_commands.bzl", "BUSYBOX_COMMANDS")
+
+package(default_visibility = ["//:discolix_all"])
 
 # ca-certificates
 

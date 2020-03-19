@@ -19,11 +19,12 @@ ENV DOCKER_CLI_EXPERIMENTAL=enabled
 RUN apt-get update && \
     apt-get install -y \
         curl zip unzip patch pkg-config zlib1g-dev \
-        python python3 docker.io gcc g++ && \
+        gcc g++ python3 python3-six docker.io && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 # install bazel
-ENV INSTALL_BAZEL_VERSION=1.2.0
+ENV INSTALL_BAZEL_VERSION=2.2.0
 RUN curl -L https://github.com/bazelbuild/bazel/releases/download/${INSTALL_BAZEL_VERSION}/bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh \
         -o bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     chmod +x bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
@@ -32,14 +33,3 @@ RUN curl -L https://github.com/bazelbuild/bazel/releases/download/${INSTALL_BAZE
 # containerized development environment
 FROM build as devel
 RUN echo 'PS1="\[$(tput setaf 3)$(tput bold)[\]devel@\\h:\\W]#\[$(tput sgr0) \]"' >> /root/.bashrc
-# install go tools (non-bazel)
-ENV INSTALL_GO_VERSION=1.13.4 \
-    PATH="$PATH:/usr/local/go/bin:/go/bin" \
-    GOPATH="/go"
-RUN curl -L https://dl.google.com/go/go${INSTALL_GO_VERSION}.linux-amd64.tar.gz \
-        -o go${INSTALL_GO_VERSION}.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go${INSTALL_GO_VERSION}.linux-amd64.tar.gz && \
-    rm -f go${INSTALL_GO_VERSION}.linux-amd64.tar.gz
-# install dependencies for rules_pkg (update_deb_packages)
-RUN go get github.com/bazelbuild/buildtools/buildifier && \
-    go get github.com/bazelbuild/buildtools/buildozer
