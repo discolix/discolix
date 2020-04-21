@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-startup --max_idle_secs=5
-
 build --color=yes
 build --nokeep_state_after_build
 build --disk_cache=/build/.bazel/disk_cache

@@ -24,7 +24,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 # install bazel
-ENV INSTALL_BAZEL_VERSION=2.2.0
+ENV INSTALL_BAZEL_VERSION=3.0.0
 RUN curl -L https://github.com/bazelbuild/bazel/releases/download/${INSTALL_BAZEL_VERSION}/bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh \
         -o bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     chmod +x bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \

@@ -37,9 +37,9 @@ container_go_deps()
 # https://github.com/bazelbuild/rules_pkg
 http_archive(
     name = "rules_pkg",
-    sha256 = "08ce92b9aea59ce6d592404de6cdfd7100c1140cdf4d4b9266942c20ec998b27",
-    strip_prefix = "rules_pkg-0.2.4/pkg",
-    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.2.4.tar.gz"],
+    sha256 = "f8bf72e76a15d045f786ef0eba92e073a50bbdbd807d237a43a759d36b1b1e2c",
+    strip_prefix = "rules_pkg-0.2.5/pkg",
+    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.2.5.tar.gz"],
 )
 
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
@@ -50,9 +50,9 @@ rules_pkg_dependencies()
 # https://github.com/bazelbuild/rules_pkg
 http_archive(
     name = "deb_package",
-    sha256 = "08ce92b9aea59ce6d592404de6cdfd7100c1140cdf4d4b9266942c20ec998b27",
-    strip_prefix = "rules_pkg-0.2.4/deb_packages",
-    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.2.4.tar.gz"],
+    sha256 = "f8bf72e76a15d045f786ef0eba92e073a50bbdbd807d237a43a759d36b1b1e2c",
+    strip_prefix = "rules_pkg-0.2.5/deb_packages",
+    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.2.5.tar.gz"],
 )
 
 http_file(
