@@ -15,18 +15,12 @@
 
 set -e
 
-# The following vars should be defined in the environment executing this script
-#PROJECT_GIT_BRANCH=  # example: master
+# The following var should be defined in the environment executing this script
 #PROJECT_GIT_COMMIT=  # example: e58a4cd1a5591654442546e68d7ee5e0168b0f84
 
 if [ -z "$PROJECT_GIT_COMMIT" ]; then
     echo "PROJECT_GIT_COMMIT not set"
     exit 1
-fi
-
-# only publish if branch is master
-if [ "$PROJECT_GIT_BRANCH" != "master" ]; then
-    exit 0
 fi
 
 if [ -z "$PROJECT_REGISTRY_PREFIX" ]; then

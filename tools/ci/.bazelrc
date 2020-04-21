@@ -13,6 +13,5 @@
 # limitations under the License.
 
 build --color=yes
-build --nokeep_state_after_build
 build --disk_cache=/build/.bazel/disk_cache
 build --repository_cache=/build/.bazel/repo_cache

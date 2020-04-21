@@ -1,9 +1,9 @@
 Discolix
 ========
-[![Build Status](https://travis-ci.org/discolix/discolix.svg?branch=master)](https://travis-ci.org/discolix/discolix)
+![](https://github.com/discolix/discolix/workflows/build/badge.svg)
 
-Discolix is based on the 
-[GoogleContainerTools/distroless](https://github.com/GoogleContainerTools/distroless) 
+Discolix is based on the
+[GoogleContainerTools/distroless](https://github.com/GoogleContainerTools/distroless)
 project, but with a focus on support for popular ARM platforms.
 
 ## Overview
