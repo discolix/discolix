@@ -132,14 +132,14 @@ deb_packages(
     mirrors = ["http://security.debian.org/debian-security"],
     packages = {
         "libexpat1": "pool/updates/main/e/expat/libexpat1_2.2.6-2+deb10u1_amd64.deb",
-        "libssl1.1": "pool/updates/main/o/openssl/libssl1.1_1.1.1d-0+deb10u2_amd64.deb",
-        "openssl": "pool/updates/main/o/openssl/openssl_1.1.1d-0+deb10u2_amd64.deb",
+        "libssl1.1": "pool/updates/main/o/openssl/libssl1.1_1.1.1d-0+deb10u3_amd64.deb",
+        "openssl": "pool/updates/main/o/openssl/openssl_1.1.1d-0+deb10u3_amd64.deb",
         "qemu-user-static": "pool/updates/main/q/qemu/qemu-user-static_3.1+dfsg-8+deb10u4_amd64.deb",
     },
     packages_sha256 = {
         "libexpat1": "d60dee1f402ee0fba6d44df584512ae9ede73e866048e8476de55d9b78fa2da1",
-        "libssl1.1": "31c15130e0e4b2c907ef7cd92e50be23320a22c0c3b54e130b5258fe6bd8df2d",
-        "openssl": "66737f435331e6c535fd0b666fd2b100a0e2ed180188c632b39a6aa904c31ef3",
+        "libssl1.1": "b293309a892730986e779aea48e97ea94cd58f34f07fefbd432c210ee4a427e2",
+        "openssl": "03a133833154325c731291c8a87daef5962dcfb75dee7cdb11f7fb923de2db82",
         "qemu-user-static": "65a9902ff1f80affa5827c5d7b2bdc407a11ac2136114add1af05a60e5e08ae6",
     },
     pgp_key = "buster_archive_security_key",
@@ -208,13 +208,13 @@ deb_packages(
     mirrors = ["http://security.debian.org/debian-security"],
     packages = {
         "libexpat1": "pool/updates/main/e/expat/libexpat1_2.2.6-2+deb10u1_arm64.deb",
-        "libssl1.1": "pool/updates/main/o/openssl/libssl1.1_1.1.1d-0+deb10u2_arm64.deb",
-        "openssl": "pool/updates/main/o/openssl/openssl_1.1.1d-0+deb10u2_arm64.deb",
+        "libssl1.1": "pool/updates/main/o/openssl/libssl1.1_1.1.1d-0+deb10u3_arm64.deb",
+        "openssl": "pool/updates/main/o/openssl/openssl_1.1.1d-0+deb10u3_arm64.deb",
     },
     packages_sha256 = {
         "libexpat1": "6d2a44169cd76b24828553f9e6364a5b92b4c1f5ae0e2d0ed2291a5512ee01e4",
-        "libssl1.1": "70a8617631020a9ac08527295f7a124ca802cf1a5a68ccc21aa0438087dc0c28",
-        "openssl": "e7fedfc78c0f47270f7077e8c15ced8d7771dd566df914ef3319c1d2882a9f17",
+        "libssl1.1": "e9ce1e4744927ce5ef3e9a556c280452d83eee51145d6f6771160197415c5f71",
+        "openssl": "47eabb66134a1b73bbbe9352f711caa45df67bbf7f260696675082c4f3bac72f",
     },
     pgp_key = "buster_archive_security_key",
 )
@@ -282,13 +282,13 @@ deb_packages(
     mirrors = ["http://security.debian.org/debian-security"],
     packages = {
         "libexpat1": "pool/updates/main/e/expat/libexpat1_2.2.6-2+deb10u1_armhf.deb",
-        "libssl1.1": "pool/updates/main/o/openssl/libssl1.1_1.1.1d-0+deb10u2_armhf.deb",
-        "openssl": "pool/updates/main/o/openssl/openssl_1.1.1d-0+deb10u2_armhf.deb",
+        "libssl1.1": "pool/updates/main/o/openssl/libssl1.1_1.1.1d-0+deb10u3_armhf.deb",
+        "openssl": "pool/updates/main/o/openssl/openssl_1.1.1d-0+deb10u3_armhf.deb",
     },
     packages_sha256 = {
         "libexpat1": "8ada16a8a8f5d96eb2dcd89de63d91e7983141ef957cdc71d34ef744f0c9b7d2",
-        "libssl1.1": "0788731a9e6688b4b08327091c5013bb38a5c1ced52d39f133b6e45a203b5cd0",
-        "openssl": "546c6851ac8c08fb3dd6fcb88083c0bd166488fecba1923a7aca6c1ca39ae4c3",
+        "libssl1.1": "1d233d0414745cfd3b7899d787fbed73ac8bea0dad15af556b5d2b61e3bc224d",
+        "openssl": "393ffad6a63aae5cc97ecaa0e739658d3488a71a39f0987dd153fda539984519",
     },
     pgp_key = "buster_archive_security_key",
 )
