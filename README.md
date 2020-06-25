@@ -2,16 +2,16 @@ Discolix
 ========
 ![](https://github.com/discolix/discolix/workflows/build/badge.svg)
 
-Discolix is based on the
+Distroless docker images for popular ARM platforms based on the
 [GoogleContainerTools/distroless](https://github.com/GoogleContainerTools/distroless)
-project, but with a focus on support for popular ARM platforms.
+project.
 
 ## Overview
 
-Discolix is a "distroless" language focused linux docker image project supporting
-image bundles for the `linux_arm`, `linux_arm64` and `linux_amd64` platforms where
+Discolix is a "distroless" language focused docker image project supporting
+image bundles for the `linux_arm`, `linux_arm64` and `linux_amd64` platforms, where
 the `linux_amd64` image is capable of serving as a drop-in replacement for its
-upstream variant (if one exists) and with the additional goal of providing a
+upstream variant (if one exists), and with the additional goal of providing a
 foundation for "multi-arch" development using docker.
 
 ## Docker Images

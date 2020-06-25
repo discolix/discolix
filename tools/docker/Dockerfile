@@ -18,13 +18,16 @@ FROM debian:buster as build
 ENV DOCKER_CLI_EXPERIMENTAL=enabled
 RUN apt-get update && \
     apt-get install -y \
-        curl zip unzip patch pkg-config zlib1g-dev \
-        gcc g++ python3 python3-six docker.io && \
+        curl zip unzip patch git pkg-config zlib1g-dev \
+        gcc g++ python3 python3-six && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-# install bazel
-ENV INSTALL_BAZEL_VERSION=3.0.0
+ENV INSTALL_DOCKER_VERSION=19.03.11
+RUN curl -L https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce-cli_${INSTALL_DOCKER_VERSION}~3-0~ubuntu-bionic_amd64.deb \
+        -o docker-ce-cli_${INSTALL_DOCKER_VERSION}~3-0~ubuntu-bionic_amd64.deb && \
+    dpkg -i docker-ce-cli_${INSTALL_DOCKER_VERSION}~3-0~ubuntu-bionic_amd64.deb
+ENV INSTALL_BAZEL_VERSION=3.3.0
 RUN curl -L https://github.com/bazelbuild/bazel/releases/download/${INSTALL_BAZEL_VERSION}/bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh \
         -o bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     chmod +x bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \

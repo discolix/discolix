@@ -25,7 +25,8 @@ fi
 
 docker run --rm \
     -v /var/run/docker.sock:/var/run/docker.sock \
+    -v $HOME/.cache/bazel:/root/.cache/bazel \
     -v $PWD:/build \
     -w /build \
     -e PROJECT_REGISTRY_PREFIX=$PROJECT_REGISTRY_PREFIX \
-    $PROJECT_BUILD_FQIN bazel --bazelrc=tools/ci/.bazelrc $@
+    $PROJECT_BUILD_FQIN bazel $@

@@ -14,4 +14,7 @@
 
 startup --max_idle_secs=5
 
+build --color=yes
 build --workspace_status_command=/proc/self/cwd/tools/wsc.sh
+
+try-import %workspace%/.bazelrc.user

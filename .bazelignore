@@ -1,2 +1,0 @@
-# reserve directory to be used for bazel stuff in the workspace
-.bazel

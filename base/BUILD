@@ -23,6 +23,7 @@ package(default_visibility = ["//visibility:public"])
 
 [container_image(
     name = "static-" + platform,
+    architecture = arch,
     layers = ["//private/layer:root-" + platform],
     stamp = True,
     tars = ["//private/noarch:base-files"],
@@ -33,6 +34,7 @@ package(default_visibility = ["//visibility:public"])
 [container_image(
     name = "static-nonroot-" + platform,
     base = ":static-" + platform,
+    architecture = arch,
     stamp = True,
     user = "%d" % NONROOT,
     workdir = "/home/nonroot",
@@ -43,6 +45,7 @@ package(default_visibility = ["//visibility:public"])
 [container_image(
     name = platform,
     base = ":static-" + platform,
+    architecture = arch,
     debs = [
         debian_buster[arch]["libc6"],
         debian_buster_security[arch]["libssl1.1"],
@@ -56,6 +59,7 @@ package(default_visibility = ["//visibility:public"])
 [container_image(
     name = "nonroot-" + platform,
     base = ":" + platform,
+    architecture = arch,
     stamp = True,
     user = "%d" % NONROOT,
     workdir = "/home/nonroot",
@@ -66,6 +70,7 @@ package(default_visibility = ["//visibility:public"])
 [container_image(
     name = "debug-" + platform,
     base = ":" + platform,
+    architecture = arch,
     entrypoint = ["/busybox/bin/sh"],
     layers = ["//private/layer:debug-" + platform],
     stamp = True,
@@ -76,6 +81,7 @@ package(default_visibility = ["//visibility:public"])
 [container_image(
     name = "debug-nonroot-" + platform,
     base = ":nonroot-" + platform,
+    architecture = arch,
     entrypoint = ["/busybox/bin/sh"],
     layers = ["//private/layer:debug-" + platform],
     stamp = True,

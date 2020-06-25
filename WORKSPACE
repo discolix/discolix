@@ -16,30 +16,13 @@ workspace(name = "com_github_discolix_discolix")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 
-# rules_docker
-# https://github.com/bazelbuild/rules_docker
-http_archive(
-    name = "io_bazel_rules_docker",
-    sha256 = "dc97fccceacd4c6be14e800b2a00693d5e8d07f69ee187babfd04a80a9f8e250",
-    strip_prefix = "rules_docker-0.14.1",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.14.1/rules_docker-v0.14.1.tar.gz"],
-)
-
-load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repos = "repositories")
-
-container_repos()
-
-load("@io_bazel_rules_docker//repositories:go_repositories.bzl", container_go_deps = "go_deps")
-
-container_go_deps()
-
 # rules_pkg
 # https://github.com/bazelbuild/rules_pkg
 http_archive(
     name = "rules_pkg",
-    sha256 = "f8bf72e76a15d045f786ef0eba92e073a50bbdbd807d237a43a759d36b1b1e2c",
-    strip_prefix = "rules_pkg-0.2.5/pkg",
-    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.2.5.tar.gz"],
+    sha256 = "b9d1387deed06eef45edd3eb7fd166577b8ad1884cb6a17898d136059d03933c",
+    strip_prefix = "rules_pkg-0.2.6-1/pkg",
+    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.2.6-1.tar.gz"],
 )
 
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
@@ -50,10 +33,27 @@ rules_pkg_dependencies()
 # https://github.com/bazelbuild/rules_pkg
 http_archive(
     name = "deb_package",
-    sha256 = "f8bf72e76a15d045f786ef0eba92e073a50bbdbd807d237a43a759d36b1b1e2c",
-    strip_prefix = "rules_pkg-0.2.5/deb_packages",
-    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.2.5.tar.gz"],
+    sha256 = "b9d1387deed06eef45edd3eb7fd166577b8ad1884cb6a17898d136059d03933c",
+    strip_prefix = "rules_pkg-0.2.6-1/deb_packages",
+    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.2.6-1.tar.gz"],
 )
+
+# rules_docker
+# https://github.com/bazelbuild/rules_docker
+http_archive(
+    name = "io_bazel_rules_docker",
+    sha256 = "6287241e033d247e9da5ff705dd6ef526bac39ae82f3d17de1b69f8cb313f9cd",
+    strip_prefix = "rules_docker-0.14.3",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.14.3/rules_docker-v0.14.3.tar.gz"],
+)
+
+load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repos = "repositories")
+
+container_repos()
+
+load("@io_bazel_rules_docker//repositories:go_repositories.bzl", container_go_deps = "go_deps")
+
+container_go_deps()
 
 http_file(
     name = "buster_archive_key",
@@ -76,7 +76,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u3_amd64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u4_amd64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_amd64.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_amd64.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_amd64.deb",
@@ -99,7 +99,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_amd64.deb",
     },
     packages_sha256 = {
-        "base-files": "d6c28487ab6e32d6be7dcd17ac994045dd09d80da3ea3eac9afad2af6a00793b",
+        "base-files": "197b11f2d991c5b288d02ed1d1ef1c947bff9b1b7afce67c3e97d99fb2711b2a",
         "busybox-static": "5a5f13e56389356a73d4e4eed2156b227f8be269ce4c2dcfe291484ea2fda625",
         "dash": "e4872d9f258e76665317c94c637b4270dc1c15c9cf42da90dbfde0225c7f4564",
         "libbz2-1.0": "238193cbaa71cc5365ef2aa5ad45de8521ac38dd54f4ab53bafa7de15046fa89",
@@ -134,13 +134,13 @@ deb_packages(
         "libexpat1": "pool/updates/main/e/expat/libexpat1_2.2.6-2+deb10u1_amd64.deb",
         "libssl1.1": "pool/updates/main/o/openssl/libssl1.1_1.1.1d-0+deb10u3_amd64.deb",
         "openssl": "pool/updates/main/o/openssl/openssl_1.1.1d-0+deb10u3_amd64.deb",
-        "qemu-user-static": "pool/updates/main/q/qemu/qemu-user-static_3.1+dfsg-8+deb10u4_amd64.deb",
+        "qemu-user-static": "pool/updates/main/q/qemu/qemu-user-static_3.1+dfsg-8+deb10u5_amd64.deb",
     },
     packages_sha256 = {
         "libexpat1": "d60dee1f402ee0fba6d44df584512ae9ede73e866048e8476de55d9b78fa2da1",
         "libssl1.1": "b293309a892730986e779aea48e97ea94cd58f34f07fefbd432c210ee4a427e2",
         "openssl": "03a133833154325c731291c8a87daef5962dcfb75dee7cdb11f7fb923de2db82",
-        "qemu-user-static": "65a9902ff1f80affa5827c5d7b2bdc407a11ac2136114add1af05a60e5e08ae6",
+        "qemu-user-static": "466bd699981ba17e2181cd7d247811cb96fb3f177b68c984b1c9ad6ce008b1ea",
     },
     pgp_key = "buster_archive_security_key",
 )
@@ -152,7 +152,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u3_arm64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u4_arm64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_arm64.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_arm64.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_arm64.deb",
@@ -175,7 +175,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_arm64.deb",
     },
     packages_sha256 = {
-        "base-files": "c742af026c308ca422bd9607696451f4883873925417ca35a529635947918fdf",
+        "base-files": "e727a22bf8d6e8fd2df524782a380740b2326652c9dde9c6ab3d4e787ae78fde",
         "busybox-static": "253b6111898747d64c20aa255c20f5d1bbd3e9547e38bb12a550cd1ca5793e36",
         "dash": "63d948ae0479c25652798cb072ecb4a24ab281cda477224773f033b570760058",
         "libbz2-1.0": "759f72ebadc1c8a790a1260c29d40736d0ebc2ee1a4e003ea70704631b42614e",
@@ -226,7 +226,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u3_armhf.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u4_armhf.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_armhf.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_armhf.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_armhf.deb",
@@ -249,7 +249,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_armhf.deb",
     },
     packages_sha256 = {
-        "base-files": "8614d3dd0aeb535d755f992693c5d207c9576cf2f1f598ebe6b4bb444e852047",
+        "base-files": "d6e835a82de1f6da80c99c6fb8d06520b49953cde05c4686052a39d21c74c22e",
         "busybox-static": "ea1ee96420013d8404d677a81c92eb54adbf58852ffaa6722a39245025157304",
         "dash": "4287aa31a5c1d9e32f077e90194b37f5d9af326630248c4a3df83c5d3965f219",
         "libbz2-1.0": "4401482dad1f11e370b0d47078b0eef74593d3b12badd8d4277a1c448ab2de15",
@@ -310,7 +310,7 @@ deb_packages(
         "python3-pkg-resources": "pool/main/p/python-setuptools/python3-pkg-resources_40.8.0-1_all.deb",
         "python3-setuptools": "pool/main/p/python-setuptools/python3-setuptools_40.8.0-1_all.deb",
         "readline-common": "pool/main/r/readline/readline-common_7.0-5_all.deb",
-        "tzdata": "pool/main/t/tzdata/tzdata_2019c-0+deb10u1_all.deb",
+        "tzdata": "pool/main/t/tzdata/tzdata_2020a-0+deb10u1_all.deb",
     },
     packages_sha256 = {
         "ca-certificates": "f55f88c8cc8fe014fa931fa22eae763fb12771e2b2a04a07bba5e4fdf3a3da6c",
@@ -323,7 +323,7 @@ deb_packages(
         "python3-pkg-resources": "43783cd63c996b36fcf29bfd8be8c44666148c9129ade88985876d7f9c0bf2f6",
         "python3-setuptools": "cd4967dbdfbb59ca451c0717aedda9ed44b63d565d1eda661c12603ac7d44fb6",
         "readline-common": "153d8a5ddb04044d10f877a8955d944612ec9035f4c73eec99d85a92c3816712",
-        "tzdata": "59b295b0e669af26d494ed2803eb9011408f768a77395db2573e67c388e8a509",
+        "tzdata": "f9464df8a102259df6caff910b810b452fd6e2af34c73ec8729b474dc2f51c55",
     },
     pgp_key = "buster_archive_key",
 )

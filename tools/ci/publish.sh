@@ -16,7 +16,7 @@
 set -e
 
 # The following var should be defined in the environment executing this script
-#PROJECT_GIT_COMMIT=  # example: e58a4cd1a5591654442546e68d7ee5e0168b0f84
+# PROJECT_GIT_COMMIT=  # example: e58a4cd1a5591654442546e68d7ee5e0168b0f84
 
 if [ -z "$PROJECT_GIT_COMMIT" ]; then
     echo "PROJECT_GIT_COMMIT not set"
@@ -42,10 +42,6 @@ publish_arch_bundle() {
     local manifest=$1; local prefix=$2
     # push arch image bundle
     for arch in $DISCOLIX_ARCHES; do
-        # quick and dirty image arch metadata fix for arm images
-        if [ $arch = "arm64" ] || [ $arch = "arm" ]; then
-            tools/ci/image_arch_fix.sh $prefix$arch linux_$arch
-        fi
         docker push $prefix$arch
     done
     # create and push manifest for arch image bundle
@@ -114,3 +110,5 @@ publish_arch_bundle "$PROJECT_REGISTRY_PREFIX/python:latest" "$PROJECT_REGISTRY_
 docker tag $PROJECT_REGISTRY_PREFIX/build:latest $PROJECT_REGISTRY_PREFIX/build:$PROJECT_GIT_COMMIT
 docker push $PROJECT_REGISTRY_PREFIX/build:$PROJECT_GIT_COMMIT
 docker push $PROJECT_REGISTRY_PREFIX/build:latest
+
+docker logout

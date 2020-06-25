@@ -8,7 +8,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y qemu-user qemu-user-static jq
+          sudo apt-get install -y qemu-user qemu-user-static
       - name: Bazel build image
         env:
           DOCKER_BUILDKIT: 1
@@ -19,10 +19,10 @@ jobs:
       - name: Bazel build cache
         uses: actions/cache@v1
         env:
-          cache-name: bazel-cache
+          cache-name: cache-bazel
         with:
-          path: ./.bazel
-          key: bazel-cache
+          path: ~/.cache/bazel
+          key: cache-bazel
       - name: Bazel build and test
         run: tools/ci/bazel.sh test //...
       - name: Publish

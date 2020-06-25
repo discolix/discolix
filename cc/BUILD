@@ -24,6 +24,7 @@ package(default_visibility = ["//visibility:public"])
 [container_image(
     name = platform,
     base = "//base:" + platform,
+    architecture = arch,
     debs = [
         debian_buster[arch]["libgcc1"],
         debian_buster[arch]["libgomp1"],
@@ -37,6 +38,7 @@ package(default_visibility = ["//visibility:public"])
 [container_image(
     name = "nonroot-" + platform,
     base = ":" + platform,
+    architecture = arch,
     stamp = True,
     user = "%d" % NONROOT,
     workdir = "/home/nonroot",
@@ -47,6 +49,7 @@ package(default_visibility = ["//visibility:public"])
 [container_image(
     name = "debug-" + platform,
     base = ":" + platform,
+    architecture = arch,
     entrypoint = ["/busybox/bin/sh"],
     layers = ["//private/layer:debug-" + platform],
     stamp = True,
@@ -57,6 +60,7 @@ package(default_visibility = ["//visibility:public"])
 [container_image(
     name = "debug-nonroot-" + platform,
     base = ":nonroot-" + platform,
+    architecture = arch,
     entrypoint = ["/busybox/bin/sh"],
     layers = ["//private/layer:debug-" + platform],
     stamp = True,
