@@ -4,12 +4,15 @@
 
 Statically compiled applications that do not require libc can use the `discolix/static` image.
 
-### Image Contents
+### Image Content Overview
 
-* ca-certificates
-* A /etc/passwd entry for a root user
-* A /tmp directory
-* tzdata
+**Debian Packages**
+* `ca-certificates`
+* `tzdata`
+
+**Other**
+* A `/etc/passwd` entry for a root user
+* A `/tmp` directory
 
 # `discolix/base`
 
@@ -17,9 +20,11 @@ Statically compiled applications that do not require libc can use the `discolix/
 
 This image contains a minimal Linux, glibc-based system. Supports most dynamically linked glibc applications (like Go apps that require libc/cgo).
 
-### Image Contents
+### Image Content Overview
 
 All contents from `discolix/static`, plus:
-* glibc
-* libssl
-* openssl
+
+**Debian Packages**
+* `libc6`
+* `libssl`
+* `openssl`
