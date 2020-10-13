@@ -26,6 +26,7 @@ http_archive(
 )
 
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
+
 rules_pkg_dependencies()
 
 # deb_package
@@ -47,10 +48,15 @@ http_archive(
 )
 
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repos = "repositories")
+
 container_repos()
+
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
+
 container_deps()
+
 load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "pip_deps")
+
 pip_deps()
 
 http_file(
@@ -74,7 +80,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u5_amd64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u6_amd64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_amd64.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_amd64.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_amd64.deb",
@@ -97,7 +103,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_amd64.deb",
     },
     packages_sha256 = {
-        "base-files": "55fed931dfbe40570ff98d42c4ecf38a17837415c14bd9c835aad302b8d29a7f",
+        "base-files": "ed640f8e2ab4e44731485ac7658a269012b9318ec8c6fb7b2b78825a624a9939",
         "busybox-static": "5a5f13e56389356a73d4e4eed2156b227f8be269ce4c2dcfe291484ea2fda625",
         "dash": "e4872d9f258e76665317c94c637b4270dc1c15c9cf42da90dbfde0225c7f4564",
         "libbz2-1.0": "238193cbaa71cc5365ef2aa5ad45de8521ac38dd54f4ab53bafa7de15046fa89",
@@ -132,13 +138,13 @@ deb_packages(
         "libexpat1": "pool/updates/main/e/expat/libexpat1_2.2.6-2+deb10u1_amd64.deb",
         "libssl1.1": "pool/updates/main/o/openssl/libssl1.1_1.1.1d-0+deb10u3_amd64.deb",
         "openssl": "pool/updates/main/o/openssl/openssl_1.1.1d-0+deb10u3_amd64.deb",
-        "qemu-user-static": "pool/updates/main/q/qemu/qemu-user-static_3.1+dfsg-8+deb10u7_amd64.deb",
+        "qemu-user-static": "pool/updates/main/q/qemu/qemu-user-static_3.1+dfsg-8+deb10u8_amd64.deb",
     },
     packages_sha256 = {
         "libexpat1": "d60dee1f402ee0fba6d44df584512ae9ede73e866048e8476de55d9b78fa2da1",
         "libssl1.1": "b293309a892730986e779aea48e97ea94cd58f34f07fefbd432c210ee4a427e2",
         "openssl": "03a133833154325c731291c8a87daef5962dcfb75dee7cdb11f7fb923de2db82",
-        "qemu-user-static": "7e934fb0dad5cd0811cc509586cd4bfb02198ecf1cf2b64160bf7f41d481bb58",
+        "qemu-user-static": "34d01a0ff83d44fe4f39e35c7f86346f5e5afa3731ce7623a12688b194ea8ca3",
     },
     pgp_key = "buster_archive_security_key",
 )
@@ -150,7 +156,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u5_arm64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u6_arm64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_arm64.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_arm64.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_arm64.deb",
@@ -173,7 +179,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_arm64.deb",
     },
     packages_sha256 = {
-        "base-files": "e7a638aa2701135270d64abb64ae70d02961ded465080d68dad5fe5d991f2d49",
+        "base-files": "236b5e00382acbd70e52b0e4dd8ee76b434e958f91f0dc4c57e293825749529b",
         "busybox-static": "253b6111898747d64c20aa255c20f5d1bbd3e9547e38bb12a550cd1ca5793e36",
         "dash": "63d948ae0479c25652798cb072ecb4a24ab281cda477224773f033b570760058",
         "libbz2-1.0": "759f72ebadc1c8a790a1260c29d40736d0ebc2ee1a4e003ea70704631b42614e",
@@ -224,7 +230,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u5_armhf.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u6_armhf.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_armhf.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_armhf.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_armhf.deb",
@@ -247,7 +253,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_armhf.deb",
     },
     packages_sha256 = {
-        "base-files": "e0a6c8154f64d11f0a0343157b29b397a35228121ad97cb84732c6e1aa036df4",
+        "base-files": "a95366fdb94cf52dcfbabaad7bd93b989e8866aed5ff29e543a7d86115a70ad6",
         "busybox-static": "ea1ee96420013d8404d677a81c92eb54adbf58852ffaa6722a39245025157304",
         "dash": "4287aa31a5c1d9e32f077e90194b37f5d9af326630248c4a3df83c5d3965f219",
         "libbz2-1.0": "4401482dad1f11e370b0d47078b0eef74593d3b12badd8d4277a1c448ab2de15",

@@ -23,7 +23,7 @@ RUN apt-get update && \
     update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-ENV INSTALL_BAZEL_VERSION=3.4.1
+ENV INSTALL_BAZEL_VERSION=3.6.0
 RUN curl -L https://github.com/bazelbuild/bazel/releases/download/${INSTALL_BAZEL_VERSION}/bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh \
         -o bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     chmod +x bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \

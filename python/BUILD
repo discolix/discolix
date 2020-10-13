@@ -35,8 +35,8 @@ package(default_visibility = ["//visibility:public"])
 
 [container_image(
     name = platform,
-    base = "//cc:" + platform,
     architecture = arch,
+    base = "//cc:" + platform,
     debs = [
         debian_buster[arch]["zlib1g"],
         debian_buster_security[arch]["libexpat1"],
@@ -64,8 +64,8 @@ package(default_visibility = ["//visibility:public"])
 
 [container_image(
     name = "nonroot-" + platform,
-    base = ":" + platform,
     architecture = arch,
+    base = ":" + platform,
     stamp = True,
     user = "%d" % NONROOT,
     workdir = "/home/nonroot",
@@ -75,8 +75,8 @@ package(default_visibility = ["//visibility:public"])
 
 [container_image(
     name = "debug-" + platform,
-    base = ":" + platform,
     architecture = arch,
+    base = ":" + platform,
     entrypoint = ["/busybox/bin/sh"],
     layers = ["//private/layer:debug-" + platform],
     stamp = True,
@@ -86,8 +86,8 @@ package(default_visibility = ["//visibility:public"])
 
 [container_image(
     name = "debug-nonroot-" + platform,
-    base = ":nonroot-" + platform,
     architecture = arch,
+    base = ":nonroot-" + platform,
     entrypoint = ["/busybox/bin/sh"],
     layers = ["//private/layer:debug-" + platform],
     stamp = True,
@@ -108,8 +108,8 @@ repkg_debs(
 
 [container_image(
     name = "pip-" + platform,
-    base = ":" + platform,
     architecture = arch,
+    base = ":" + platform,
     debs = [
         debian_buster["noarch"]["python-pip-whl"],
     ],

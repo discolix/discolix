@@ -16,7 +16,7 @@
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("@io_bazel_rules_docker//contrib:passwd.bzl", "passwd_entry", "passwd_tar")
 load("@io_bazel_rules_docker//contrib:group.bzl", "group_entry", "group_file")
-load(":files.bzl", "nsswitch_conf_file", "os_release_file", "NOBODY", "NONROOT")
+load(":files.bzl", "NOBODY", "NONROOT", "nsswitch_conf_file", "os_release_file")
 
 package(default_visibility = ["//:discolix_all"])
 
@@ -123,15 +123,15 @@ nsswitch_conf_file(
 
 os_release_file(
     name = "os-release",
+    bug_report_url = "https://github.com/discolix/discolix",
+    home_url = "https://github.com/discolix/discolix",
+    id = "debian",
     pretty_name = "discolix",
     release_name = "Debian GNU/Linux",
-    version_id = "10",
+    support_url = "https://github.com/discolix/discolix",
     version = "10 (buster)",
     version_codename = "buster",
-    id = "debian",
-    home_url = "https://github.com/discolix/discolix",
-    support_url = "https://github.com/discolix/discolix",
-    bug_report_url = "https://github.com/discolix/discolix",
+    version_id = "10",
 )
 
 pkg_tar(
@@ -148,7 +148,7 @@ pkg_tar(
 pkg_tar(
     name = "base-files",
     deps = [
-        ":passwd",
         ":etc",
-    ]
+        ":passwd",
+    ],
 )
