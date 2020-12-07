@@ -29,4 +29,5 @@ docker run --rm \
     -v $PWD:/build \
     -w /build \
     -e PROJECT_REGISTRY_PREFIX=$PROJECT_REGISTRY_PREFIX \
+    -e DEB_CHECKER_NOTIFIERS=$DEB_CHECKER_NOTIFIERS \
     $PROJECT_BUILD_FQIN bazel $@

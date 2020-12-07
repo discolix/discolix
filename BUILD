@@ -16,6 +16,8 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_bundle")
 
 package(default_visibility = ["//visibility:public"])
 
+exports_files(["WORKSPACE"])
+
 package_group(
     name = "discolix_all",
     includes = [

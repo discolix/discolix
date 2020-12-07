@@ -1,0 +1,18 @@
+name: check-debs
+on:
+  schedule:
+    - cron: "0 20 * * *"
+jobs:
+  check:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: bazel cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/bazel
+          key: bazel
+      - name: check for bad urls
+        env:
+          DEB_CHECKER_NOTIFIERS: ${{ secrets.DEB_CHECKER_NOTIFIERS }}
+        run: tools/ci/bazel.sh run //tools/deb_checker

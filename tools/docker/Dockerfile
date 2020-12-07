@@ -18,9 +18,10 @@ FROM debian:buster as build
 RUN apt-get update && \
     apt-get install -y \
         curl zip unzip patch git pkg-config zlib1g-dev \
-        gcc g++ python3 python3-pip python3-six && \
+        gcc g++ python3 python3-distutils python3-six && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1 && \
-    update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 && \
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python get-pip.py && rm -f get-pip.py && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 ENV INSTALL_BAZEL_VERSION=3.7.0

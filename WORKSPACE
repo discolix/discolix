@@ -16,8 +16,8 @@ workspace(name = "com_github_discolix_discolix")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 
-# rules_pkg
-# https://github.com/bazelbuild/rules_pkg
+# discolix build deps
+
 http_archive(
     name = "rules_pkg",
     sha256 = "e4a2fde34360931549c31d13bbd2ba579e8706d7a1e5970aefefad2d97ca437c",
@@ -29,8 +29,6 @@ load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 
 rules_pkg_dependencies()
 
-# deb_package
-# https://github.com/bazelbuild/rules_pkg
 http_archive(
     name = "deb_package",
     sha256 = "e4a2fde34360931549c31d13bbd2ba579e8706d7a1e5970aefefad2d97ca437c",
@@ -38,8 +36,13 @@ http_archive(
     urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.3.0.tar.gz"],
 )
 
-# rules_docker
-# https://github.com/bazelbuild/rules_docker
+http_archive(
+    name = "rules_python",
+    sha256 = "48f7e716f4098b85296ad93f5a133baf712968c13fbc2fdf3a6136158fe86eac",
+    strip_prefix = "rules_python-0.1.0",
+    urls = ["https://github.com/bazelbuild/rules_python/archive/0.1.0.tar.gz"],
+)
+
 http_archive(
     name = "io_bazel_rules_docker",
     sha256 = "1698624e878b0607052ae6131aa216d45ebb63871ec497f26c67455b34119c80",
@@ -58,6 +61,45 @@ container_deps()
 load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "io_bazel_rules_docker_pip_deps")
 
 io_bazel_rules_docker_pip_deps()
+
+# deb_checker utility build deps
+
+http_archive(
+    name = "com_github_grpc_grpc",
+    sha256 = "ba74b97a2f1b4e22ec5fb69d639d849d2069fb58ea7d6579a31f800af6fe3b6c",
+    strip_prefix = "grpc-1.30.2",
+    urls = ["https://github.com/grpc/grpc/archive/v1.30.2.tar.gz"],
+)
+
+load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
+
+grpc_deps()
+
+load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
+
+grpc_extra_deps()
+
+http_archive(
+    name = "com_github_emacski_bazeltools",
+    sha256 = "599ab534e1d4a5c647cb0e02ff22356ee60f25174276316a16b76eed326af291",
+    strip_prefix = "bazel-tools-2cff23e6f3930199eaafef5758f325304d71b72f",
+    urls = ["https://github.com/emacski/bazel-tools/archive/2cff23e6f3930199eaafef5758f325304d71b72f.tar.gz"],
+)
+
+http_archive(
+    name = "bazel_buildtools",
+    sha256 = "a02ba93b96a8151b5d8d3466580f6c1f7e77212c4eb181cba53eb2cae7752a23",
+    strip_prefix = "buildtools-3.5.0",
+    urls = ["https://github.com/bazelbuild/buildtools/archive/3.5.0.tar.gz"],
+)
+
+load("@rules_python//python:pip.bzl", "pip_install")
+
+pip_install(
+    requirements = "//tools/deb_checker:requirements.txt",
+)
+
+# deb packages
 
 http_file(
     name = "buster_archive_key",
