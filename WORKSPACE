@@ -20,9 +20,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file"
 # https://github.com/bazelbuild/rules_pkg
 http_archive(
     name = "rules_pkg",
-    sha256 = "b9d1387deed06eef45edd3eb7fd166577b8ad1884cb6a17898d136059d03933c",
-    strip_prefix = "rules_pkg-0.2.6-1/pkg",
-    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.2.6-1.tar.gz"],
+    sha256 = "e4a2fde34360931549c31d13bbd2ba579e8706d7a1e5970aefefad2d97ca437c",
+    strip_prefix = "rules_pkg-0.3.0/pkg",
+    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.3.0.tar.gz"],
 )
 
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
@@ -33,18 +33,18 @@ rules_pkg_dependencies()
 # https://github.com/bazelbuild/rules_pkg
 http_archive(
     name = "deb_package",
-    sha256 = "b9d1387deed06eef45edd3eb7fd166577b8ad1884cb6a17898d136059d03933c",
-    strip_prefix = "rules_pkg-0.2.6-1/deb_packages",
-    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.2.6-1.tar.gz"],
+    sha256 = "e4a2fde34360931549c31d13bbd2ba579e8706d7a1e5970aefefad2d97ca437c",
+    strip_prefix = "rules_pkg-0.3.0/deb_packages",
+    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.3.0.tar.gz"],
 )
 
 # rules_docker
 # https://github.com/bazelbuild/rules_docker
 http_archive(
     name = "io_bazel_rules_docker",
-    sha256 = "4521794f0fba2e20f3bf15846ab5e01d5332e587e9ce81629c7f96c793bb7036",
-    strip_prefix = "rules_docker-0.14.4",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.14.4/rules_docker-v0.14.4.tar.gz"],
+    sha256 = "1698624e878b0607052ae6131aa216d45ebb63871ec497f26c67455b34119c80",
+    strip_prefix = "rules_docker-0.15.0",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.15.0/rules_docker-v0.15.0.tar.gz"],
 )
 
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repos = "repositories")
@@ -55,9 +55,9 @@ load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
 container_deps()
 
-load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "pip_deps")
+load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "io_bazel_rules_docker_pip_deps")
 
-pip_deps()
+io_bazel_rules_docker_pip_deps()
 
 http_file(
     name = "buster_archive_key",

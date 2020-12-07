@@ -5,29 +5,28 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
+      - name: install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-user qemu-user-static
-      - name: Bazel build image
+      - name: bazel cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/bazel
+          key: bazel
+      - name: build and test
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          docker pull discolix/build
-          docker tag discolix/build discolix/build:cache
-          docker build --cache-from discolix/build:cache --build-arg BUILDKIT_INLINE_CACHE=1 --target build -t discolix/build -f tools/docker/Dockerfile .
-      - name: Bazel build cache
-        uses: actions/cache@v1
-        env:
-          cache-name: cache-bazel
-        with:
-          path: ~/.cache/bazel
-          key: cache-bazel
-      - name: Bazel build and test
-        run: tools/ci/bazel.sh test //...
-      - name: Publish
+          docker build \
+            --cache-from discolix/build \
+            --build-arg BUILDKIT_INLINE_CACHE=1 \
+            --target build -t discolix/build -f tools/docker/Dockerfile .
+          tools/ci/bazel.sh test //...
+      - name: publish
         if: github.ref == 'refs/heads/master'
         env:
+          PROJECT_GIT_COMMIT: ${{ github.sha }}
           REGISTRY_USER: ${{ secrets.DockerHubUser }}
           REGISTRY_PASS: ${{ secrets.DockerHubToken }}
-        run: PROJECT_GIT_COMMIT=$GITHUB_SHA tools/ci/publish.sh
+        run: tools/ci/publish.sh
