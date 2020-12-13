@@ -7,12 +7,14 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: bazel cache
+      - name: Bazel build-cache
         uses: actions/cache@v2
         with:
           path: ~/.cache/bazel
           key: bazel
-      - name: check for bad urls
+      - name: Check for bad urls
         env:
           DEB_CHECKER_NOTIFIERS: ${{ secrets.DEB_CHECKER_NOTIFIERS }}
         run: tools/ci/bazel.sh run //tools/deb_checker
+      - name: Bazel build-cache permissions
+        run: sudo chmod -R +rwx ~/.cache/bazel

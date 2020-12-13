@@ -5,16 +5,16 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: install dependencies
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-user qemu-user-static
-      - name: bazel cache
+      - name: Bazel build-cache
         uses: actions/cache@v2
         with:
           path: ~/.cache/bazel
           key: bazel
-      - name: build and test
+      - name: Bazel build and test
         env:
           DOCKER_BUILDKIT: 1
         run: |
@@ -23,7 +23,9 @@ jobs:
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --target build -t discolix/build -f tools/docker/Dockerfile .
           tools/ci/bazel.sh test //...
-      - name: publish
+      - name: Bazel build-cache permissions
+        run: sudo chmod -R +rwx ~/.cache/bazel
+      - name: Publish docker images
         if: github.ref == 'refs/heads/master'
         env:
           PROJECT_GIT_COMMIT: ${{ github.sha }}
