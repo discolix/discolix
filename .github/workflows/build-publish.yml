@@ -9,12 +9,29 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-user qemu-user-static
+      - name: Initialize bazel build-cache
+        id: bazel-cache-metadata
+        env:
+          BAZEL_CACHE_KEY: "bazel-cache"
+          BAZEL_CACHE_DIR: "bazel"
+        run: |
+          echo "${BAZEL_CACHE_DIR}/" >> .bazelignore
+          echo "startup --output_base=${BAZEL_CACHE_DIR}" >> .bazelrc.user
+          echo "startup --output_user_root=${BAZEL_CACHE_DIR}/disk_cache" >> .bazelrc.user
+          echo "build --disk_cache=${BAZEL_CACHE_DIR}/disk_cache" >> .bazelrc.user
+          export BAZEL_CACHE_KEY_PREFIX="${BAZEL_CACHE_KEY}-$(/bin/date -u '+%m')"
+          echo "::set-output name=path::${BAZEL_CACHE_DIR}/disk_cache"
+          echo "::set-output name=key::${BAZEL_CACHE_KEY_PREFIX}-$(cat /proc/sys/kernel/random/uuid)"
+          echo "::set-output name=key_prefix::${BAZEL_CACHE_KEY_PREFIX}"
+        shell: bash
       - name: Bazel build-cache
         uses: actions/cache@v2
         with:
-          path: ~/.cache/bazel
-          key: bazel
-      - name: Bazel build and test
+          path: ${{ steps.bazel-cache-metadata.outputs.path }}
+          key: ${{ steps.bazel-cache-metadata.outputs.key }}
+          restore-keys: |
+            ${{ steps.bazel-cache-metadata.outputs.key_prefix }}
+      - name: Build and test discolix images
         env:
           DOCKER_BUILDKIT: 1
         run: |
@@ -23,9 +40,7 @@ jobs:
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --target build -t discolix/build -f tools/docker/Dockerfile .
           tools/ci/bazel.sh test //...
-      - name: Bazel build-cache permissions
-        run: sudo chmod -R +rwx ~/.cache/bazel
-      - name: Publish docker images
+      - name: Publish all discolix docker images
         if: github.ref == 'refs/heads/master'
         env:
           PROJECT_GIT_COMMIT: ${{ github.sha }}

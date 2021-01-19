@@ -7,14 +7,29 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+      - name: Initialize bazel build-cache
+        id: bazel-cache-metadata
+        env:
+          BAZEL_CACHE_KEY: "bazel-cache"
+          BAZEL_CACHE_DIR: "bazel"
+        run: |
+          echo "${BAZEL_CACHE_DIR}/" >> .bazelignore
+          echo "startup --output_base=${BAZEL_CACHE_DIR}" >> .bazelrc.user
+          echo "startup --output_user_root=${BAZEL_CACHE_DIR}/disk_cache" >> .bazelrc.user
+          echo "build --disk_cache=${BAZEL_CACHE_DIR}/disk_cache" >> .bazelrc.user
+          export BAZEL_CACHE_KEY_PREFIX="${BAZEL_CACHE_KEY}-$(/bin/date -u '+%m')"
+          echo "::set-output name=path::${BAZEL_CACHE_DIR}/disk_cache"
+          echo "::set-output name=key::${BAZEL_CACHE_KEY_PREFIX}-$(cat /proc/sys/kernel/random/uuid)"
+          echo "::set-output name=key_prefix::${BAZEL_CACHE_KEY_PREFIX}"
+        shell: bash
       - name: Bazel build-cache
         uses: actions/cache@v2
         with:
-          path: ~/.cache/bazel
-          key: bazel
-      - name: Check for bad urls
+          path: ${{ steps.bazel-cache-metadata.outputs.path }}
+          key: ${{ steps.bazel-cache-metadata.outputs.key }}
+          restore-keys: |
+            ${{ steps.bazel-cache-metadata.outputs.key_prefix }}
+      - name: Run deb_checker script
         env:
           DEB_CHECKER_NOTIFIERS: ${{ secrets.DEB_CHECKER_NOTIFIERS }}
         run: tools/ci/bazel.sh run //tools/deb_checker
-      - name: Bazel build-cache permissions
-        run: sudo chmod -R +rwx ~/.cache/bazel
