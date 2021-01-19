@@ -30,7 +30,7 @@ RUN curl -L https://github.com/bazelbuild/bazel/releases/download/${INSTALL_BAZE
     chmod +x bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     ./bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     rm -f bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh
-ENV INSTALL_DOCKER_VERSION=19.03.12
+ENV INSTALL_DOCKER_VERSION=20.10.2
 ENV DOCKER_CLI_EXPERIMENTAL=enabled
 RUN curl -L https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce-cli_${INSTALL_DOCKER_VERSION}~3-0~ubuntu-bionic_amd64.deb \
         -o docker-ce-cli_${INSTALL_DOCKER_VERSION}~3-0~ubuntu-bionic_amd64.deb && \
