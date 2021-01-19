@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # Copyright 2019 Erik Maciejewski
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
+
 # grab what we need
 cp usr/bin/qemu-aarch64-static .
 cp usr/bin/qemu-arm-static .
 
-# discard all in usr/ except copyright
-find usr -not -name 'copyright' -delete >/dev/null 2>&1 || true
+# discard all in usr/ except copyright (will preserve copyright path, since
+# non-empty dirs will error when attempting to delete, and hence the || true)
+find usr/ -not -name 'copyright' -delete >/dev/null 2>&1 || true
 
 mkdir usr/bin
 cp qemu-aarch64-static usr/bin/

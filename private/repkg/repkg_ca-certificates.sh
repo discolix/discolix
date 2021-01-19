@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # Copyright 2017 Google Inc. All rights reserved.
 # Modifications copyright 2019 Erik Maciejewski
 #
@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
+
 # concat all the certs.
 CERT_FILE=./etc/ssl/certs/ca-certificates.crt
 mkdir -p $(dirname $CERT_FILE)
@@ -23,5 +25,6 @@ for cert in $CERTS; do
   cat $cert >> $CERT_FILE
 done
 
-# discard all in usr/ except copyright
-find usr -not -name 'copyright' -delete >/dev/null 2>&1 || true
+# discard all in usr/ except copyright (will preserve copyright path, since
+# non-empty dirs will error when attempting to delete, and hence the || true)
+find usr/ -not -name 'copyright' -delete >/dev/null 2>&1 || true

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("//repkg:defs.bzl", "repkg_debs")
+load("@com_github_emacski_bazeltools//repkg:defs.bzl", "repkg_debs")
 load("//private:debian_buster.bzl", "debian_buster", "debian_buster_security")
 load("//private:platforms.bzl", "PLATFORMS")
 load("//private/noarch:files.bzl", "NONROOT")

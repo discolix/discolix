@@ -62,6 +62,13 @@ load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "io_bazel_rule
 
 io_bazel_rules_docker_pip_deps()
 
+http_archive(
+    name = "com_github_emacski_bazeltools",
+    strip_prefix = "bazel-tools-dd25da0a24cd47bef4232d86bdd972109412bd26",
+    sha256 = "dfebb7381b25698ddbc409646126c425cfb61d1308795b1ee71635eb8c9a1b74",
+    urls = ["https://github.com/emacski/bazel-tools/archive/dd25da0a24cd47bef4232d86bdd972109412bd26.tar.gz"],
+)
+
 # deb_checker utility build deps
 
 http_archive(
@@ -78,13 +85,6 @@ grpc_deps()
 load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
 
 grpc_extra_deps()
-
-http_archive(
-    name = "com_github_emacski_bazeltools",
-    sha256 = "599ab534e1d4a5c647cb0e02ff22356ee60f25174276316a16b76eed326af291",
-    strip_prefix = "bazel-tools-2cff23e6f3930199eaafef5758f325304d71b72f",
-    urls = ["https://github.com/emacski/bazel-tools/archive/2cff23e6f3930199eaafef5758f325304d71b72f.tar.gz"],
-)
 
 http_archive(
     name = "bazel_buildtools",

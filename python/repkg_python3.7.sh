@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # Copyright 2019 Erik Maciejewski
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,15 +20,15 @@ NONROOT=65532
 # discard man stuff
 rm -rf usr/share/man/
 
-mkdir -p usr/local/lib/python3.7 2> /dev/null || true
-chmod 2775 usr/local/lib/python3.7 2> /dev/null || true
+mkdir -p usr/local/lib/python3.7 2> /dev/null
+chmod 2775 usr/local/lib/python3.7 2> /dev/null
 # nonroot user
-chown root:$NONROOT usr/local/lib/python3.7 2> /dev/null || true
+chown root:$NONROOT usr/local/lib/python3.7 2> /dev/null
 
-mkdir -p usr/local/lib/python3.7/dist-packages 2> /dev/null || true
-chmod 2775 usr/local/lib/python3.7/dist-packages 2> /dev/null || true
+mkdir -p usr/local/lib/python3.7/dist-packages 2> /dev/null
+chmod 2775 usr/local/lib/python3.7/dist-packages 2> /dev/null
 # nonroot user
-chown root:$NONROOT usr/local/lib/python3.7 2> /dev/null || true
+chown root:$NONROOT usr/local/lib/python3.7 2> /dev/null
 
 # bytecode "standard" compile stdlib
 #filt='fgrep -v sitecustomize.py'

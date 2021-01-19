@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("//repkg:defs.bzl", "repkg_debs")
+load("@com_github_emacski_bazeltools//repkg:defs.bzl", "repkg_debs")
 load("//private:debian_buster.bzl", "debian_buster", "debian_buster_security")
 load("//private:platforms.bzl", "PLATFORMS")
 load(":busybox_commands.bzl", "BUSYBOX_COMMANDS")
