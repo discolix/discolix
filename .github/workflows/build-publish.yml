@@ -39,9 +39,10 @@ jobs:
             --cache-from discolix/build \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --target build -t discolix/build -f tools/docker/Dockerfile .
+          sudo chown -R root:root ${{ steps.bazel-cache-metadata.outputs.path }} || true
           tools/ci/bazel.sh test //...
       - name: Publish all discolix docker images
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/nopublish'
         env:
           PROJECT_GIT_COMMIT: ${{ github.sha }}
           REGISTRY_USER: ${{ secrets.DockerHubUser }}

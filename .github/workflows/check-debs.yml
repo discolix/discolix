@@ -32,4 +32,6 @@ jobs:
       - name: Run deb_checker script
         env:
           DEB_CHECKER_NOTIFIERS: ${{ secrets.DEB_CHECKER_NOTIFIERS }}
-        run: tools/ci/bazel.sh run //tools/deb_checker
+        run: |
+          sudo chown -R root:root ${{ steps.bazel-cache-metadata.outputs.path }} || true
+          tools/ci/bazel.sh run //tools/deb_checker
