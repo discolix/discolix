@@ -64,8 +64,8 @@ io_bazel_rules_docker_pip_deps()
 
 http_archive(
     name = "com_github_emacski_bazeltools",
-    strip_prefix = "bazel-tools-dd25da0a24cd47bef4232d86bdd972109412bd26",
     sha256 = "dfebb7381b25698ddbc409646126c425cfb61d1308795b1ee71635eb8c9a1b74",
+    strip_prefix = "bazel-tools-dd25da0a24cd47bef4232d86bdd972109412bd26",
     urls = ["https://github.com/emacski/bazel-tools/archive/dd25da0a24cd47bef4232d86bdd972109412bd26.tar.gz"],
 )
 
