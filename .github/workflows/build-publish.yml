@@ -42,7 +42,7 @@ jobs:
           sudo chown -R root:root ${{ steps.bazel-cache-metadata.outputs.path }} || true
           tools/ci/bazel.sh test //...
       - name: Publish all discolix docker images
-        if: github.ref == 'refs/heads/nopublish'
+        if: github.ref == 'refs/heads/master'
         env:
           PROJECT_GIT_COMMIT: ${{ github.sha }}
           REGISTRY_USER: ${{ secrets.DockerHubUser }}
