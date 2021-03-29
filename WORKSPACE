@@ -20,9 +20,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file"
 
 http_archive(
     name = "rules_pkg",
-    sha256 = "e4a2fde34360931549c31d13bbd2ba579e8706d7a1e5970aefefad2d97ca437c",
-    strip_prefix = "rules_pkg-0.3.0/pkg",
-    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.3.0.tar.gz"],
+    sha256 = "dff10e80f2d58d4ce8434ef794e5f9ec0856f3a355ae41c6056259b65e1ad11a",
+    strip_prefix = "rules_pkg-0.4.0/pkg",
+    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.4.0.tar.gz"],
 )
 
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
@@ -31,9 +31,9 @@ rules_pkg_dependencies()
 
 http_archive(
     name = "deb_package",
-    sha256 = "e4a2fde34360931549c31d13bbd2ba579e8706d7a1e5970aefefad2d97ca437c",
-    strip_prefix = "rules_pkg-0.3.0/deb_packages",
-    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.3.0.tar.gz"],
+    sha256 = "dff10e80f2d58d4ce8434ef794e5f9ec0856f3a355ae41c6056259b65e1ad11a",
+    strip_prefix = "rules_pkg-0.4.0/deb_packages",
+    urls = ["https://github.com/bazelbuild/rules_pkg/archive/0.4.0.tar.gz"],
 )
 
 http_archive(
@@ -45,22 +45,21 @@ http_archive(
 
 http_archive(
     name = "io_bazel_rules_docker",
-    sha256 = "1698624e878b0607052ae6131aa216d45ebb63871ec497f26c67455b34119c80",
-    strip_prefix = "rules_docker-0.15.0",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.15.0/rules_docker-v0.15.0.tar.gz"],
+    sha256 = "95d39fd84ff4474babaf190450ee034d958202043e366b9fc38f438c9e6c3334",
+    strip_prefix = "rules_docker-0.16.0",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.16.0/rules_docker-v0.16.0.tar.gz"],
 )
 
-load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repos = "repositories")
+load(
+    "@io_bazel_rules_docker//repositories:repositories.bzl",
+    container_repos = "repositories",
+)
 
 container_repos()
 
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
 container_deps()
-
-load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "io_bazel_rules_docker_pip_deps")
-
-io_bazel_rules_docker_pip_deps()
 
 http_archive(
     name = "com_github_emacski_bazeltools",
