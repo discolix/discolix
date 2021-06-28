@@ -14,7 +14,7 @@
 
 load("@pip//:requirements.bzl", "requirement")
 load("@rules_python//python:defs.bzl", "py_binary")
-load("@com_github_emacski_bazeltools//protobuf:python_rules.bzl", "py_proto_library")
+load("@com_github_emacski_bazeltools//protobuf:py.bzl", "py_proto_library")
 
 exports_files(["requirements.txt"])
 

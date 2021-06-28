@@ -38,24 +38,24 @@ http_archive(
 
 http_archive(
     name = "rules_python",
-    sha256 = "48f7e716f4098b85296ad93f5a133baf712968c13fbc2fdf3a6136158fe86eac",
-    strip_prefix = "rules_python-0.1.0",
-    urls = ["https://github.com/bazelbuild/rules_python/archive/0.1.0.tar.gz"],
+    sha256 = "4feecd37ec6e9941a455a19e7392bed65003eab0aa6ea347ca431bce2640e530",
+    strip_prefix = "rules_python-0.3.0",
+    urls = ["https://github.com/bazelbuild/rules_python/archive/0.3.0.tar.gz"],
 )
 
 http_archive(
     name = "io_bazel_rules_docker",
-    sha256 = "95d39fd84ff4474babaf190450ee034d958202043e366b9fc38f438c9e6c3334",
-    strip_prefix = "rules_docker-0.16.0",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.16.0/rules_docker-v0.16.0.tar.gz"],
+    sha256 = "59d5b42ac315e7eadffa944e86e90c2990110a1c8075f1cd145f487e999d22b3",
+    strip_prefix = "rules_docker-0.17.0",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.17.0/rules_docker-v0.17.0.tar.gz"],
 )
 
 load(
     "@io_bazel_rules_docker//repositories:repositories.bzl",
-    container_repos = "repositories",
+    container_repositories = "repositories",
 )
 
-container_repos()
+container_repositories()
 
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
@@ -63,18 +63,18 @@ container_deps()
 
 http_archive(
     name = "com_github_emacski_bazeltools",
-    sha256 = "dfebb7381b25698ddbc409646126c425cfb61d1308795b1ee71635eb8c9a1b74",
-    strip_prefix = "bazel-tools-dd25da0a24cd47bef4232d86bdd972109412bd26",
-    urls = ["https://github.com/emacski/bazel-tools/archive/dd25da0a24cd47bef4232d86bdd972109412bd26.tar.gz"],
+    sha256 = "dba9e8f0613401ed3c052d6fe79b3517197a7747046659845309fb17e9b3038d",
+    strip_prefix = "bazel-tools-17a0d8b9ae66bc542853a72365ef1aeb85086827",
+    urls = ["https://github.com/emacski/bazel-tools/archive/17a0d8b9ae66bc542853a72365ef1aeb85086827.tar.gz"],
 )
 
 # deb_checker utility build deps
 
 http_archive(
     name = "com_github_grpc_grpc",
-    sha256 = "ba74b97a2f1b4e22ec5fb69d639d849d2069fb58ea7d6579a31f800af6fe3b6c",
-    strip_prefix = "grpc-1.30.2",
-    urls = ["https://github.com/grpc/grpc/archive/v1.30.2.tar.gz"],
+    sha256 = "f60e5b112913bf776a22c16a3053cc02cf55e60bf27a959fd54d7aaf8e2da6e8",
+    strip_prefix = "grpc-1.38.1",
+    urls = ["https://github.com/grpc/grpc/archive/v1.38.1.tar.gz"],
 )
 
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
@@ -87,9 +87,9 @@ grpc_extra_deps()
 
 http_archive(
     name = "bazel_buildtools",
-    sha256 = "a02ba93b96a8151b5d8d3466580f6c1f7e77212c4eb181cba53eb2cae7752a23",
-    strip_prefix = "buildtools-3.5.0",
-    urls = ["https://github.com/bazelbuild/buildtools/archive/3.5.0.tar.gz"],
+    sha256 = "c28eef4d30ba1a195c6837acf6c75a4034981f5b4002dda3c5aa6e48ce023cf1",
+    strip_prefix = "buildtools-4.0.1",
+    urls = ["https://github.com/bazelbuild/buildtools/archive/4.0.1.tar.gz"],
 )
 
 load("@rules_python//python:pip.bzl", "pip_install")
@@ -121,7 +121,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u9_amd64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u10_amd64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_amd64.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_amd64.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_amd64.deb",
@@ -144,7 +144,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_amd64.deb",
     },
     packages_sha256 = {
-        "base-files": "a01220a67b386188e412100adcf986d5ad7c5f2d4a04b77f0b85bcafdd1009a1",
+        "base-files": "159aba5390dd6a27381653aff9d919327b9aeadcdb1278e0b7523f0c4a2899d4",
         "busybox-static": "5a5f13e56389356a73d4e4eed2156b227f8be269ce4c2dcfe291484ea2fda625",
         "dash": "e4872d9f258e76665317c94c637b4270dc1c15c9cf42da90dbfde0225c7f4564",
         "libbz2-1.0": "238193cbaa71cc5365ef2aa5ad45de8521ac38dd54f4ab53bafa7de15046fa89",
@@ -197,7 +197,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u9_arm64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u10_arm64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_arm64.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_arm64.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_arm64.deb",
@@ -220,7 +220,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_arm64.deb",
     },
     packages_sha256 = {
-        "base-files": "90e6cf7cfb06937cf123aae58870ef90b07d622a1626f2e8f441f5cfba809f3a",
+        "base-files": "93655111f8c0bbcaaf8fb3d70ee06aab3b611914982c4745d5ed9d2189249628",
         "busybox-static": "253b6111898747d64c20aa255c20f5d1bbd3e9547e38bb12a550cd1ca5793e36",
         "dash": "63d948ae0479c25652798cb072ecb4a24ab281cda477224773f033b570760058",
         "libbz2-1.0": "759f72ebadc1c8a790a1260c29d40736d0ebc2ee1a4e003ea70704631b42614e",
@@ -271,7 +271,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u9_armhf.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u10_armhf.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_armhf.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_armhf.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_armhf.deb",
@@ -294,7 +294,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_armhf.deb",
     },
     packages_sha256 = {
-        "base-files": "3dc061e68accd9ed2bda48990333d64140578c2e8021353b5a954f74ea867476",
+        "base-files": "243872cdb20b5c8b4218bf6069d20aa4198b0984dfabaa26ca55e13a5055e2f3",
         "busybox-static": "ea1ee96420013d8404d677a81c92eb54adbf58852ffaa6722a39245025157304",
         "dash": "4287aa31a5c1d9e32f077e90194b37f5d9af326630248c4a3df83c5d3965f219",
         "libbz2-1.0": "4401482dad1f11e370b0d47078b0eef74593d3b12badd8d4277a1c448ab2de15",

@@ -24,13 +24,13 @@ RUN apt-get update && \
     python get-pip.py && rm -f get-pip.py && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-ENV INSTALL_BAZEL_VERSION=4.0.0
+ENV INSTALL_BAZEL_VERSION=4.1.0
 RUN curl -L https://github.com/bazelbuild/bazel/releases/download/${INSTALL_BAZEL_VERSION}/bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh \
         -o bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     chmod +x bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     ./bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     rm -f bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh
-ENV INSTALL_DOCKER_VERSION=20.10.3
+ENV INSTALL_DOCKER_VERSION=20.10.7
 ENV DOCKER_CLI_EXPERIMENTAL=enabled
 RUN curl -L https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce-cli_${INSTALL_DOCKER_VERSION}~3-0~ubuntu-bionic_amd64.deb \
         -o docker-ce-cli_${INSTALL_DOCKER_VERSION}~3-0~ubuntu-bionic_amd64.deb && \
