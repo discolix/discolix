@@ -121,7 +121,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u10_amd64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u11_amd64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_amd64.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_amd64.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_amd64.deb",
@@ -144,7 +144,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_amd64.deb",
     },
     packages_sha256 = {
-        "base-files": "159aba5390dd6a27381653aff9d919327b9aeadcdb1278e0b7523f0c4a2899d4",
+        "base-files": "3e144c4ca83ab5689e54ce18f4c327f7cec6025160b17bea45136c013d1b8350",
         "busybox-static": "5a5f13e56389356a73d4e4eed2156b227f8be269ce4c2dcfe291484ea2fda625",
         "dash": "e4872d9f258e76665317c94c637b4270dc1c15c9cf42da90dbfde0225c7f4564",
         "libbz2-1.0": "238193cbaa71cc5365ef2aa5ad45de8521ac38dd54f4ab53bafa7de15046fa89",
@@ -197,7 +197,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u10_arm64.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u11_arm64.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_arm64.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_arm64.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_arm64.deb",
@@ -220,7 +220,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_arm64.deb",
     },
     packages_sha256 = {
-        "base-files": "93655111f8c0bbcaaf8fb3d70ee06aab3b611914982c4745d5ed9d2189249628",
+        "base-files": "e8f46bcbccd2f0123a7492dd9a70922e40cd69dd0aae508eaedbc5b82131f3b2",
         "busybox-static": "253b6111898747d64c20aa255c20f5d1bbd3e9547e38bb12a550cd1ca5793e36",
         "dash": "63d948ae0479c25652798cb072ecb4a24ab281cda477224773f033b570760058",
         "libbz2-1.0": "759f72ebadc1c8a790a1260c29d40736d0ebc2ee1a4e003ea70704631b42614e",
@@ -271,7 +271,7 @@ deb_packages(
     distro_type = "debian",
     mirrors = ["http://deb.debian.org/debian"],
     packages = {
-        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u10_armhf.deb",
+        "base-files": "pool/main/b/base-files/base-files_10.3+deb10u11_armhf.deb",
         "busybox-static": "pool/main/b/busybox/busybox-static_1.30.1-4_armhf.deb",
         "dash": "pool/main/d/dash/dash_0.5.10.2-5_armhf.deb",
         "libbz2-1.0": "pool/main/b/bzip2/libbz2-1.0_1.0.6-9.2~deb10u1_armhf.deb",
@@ -294,7 +294,7 @@ deb_packages(
         "zlib1g": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-1_armhf.deb",
     },
     packages_sha256 = {
-        "base-files": "243872cdb20b5c8b4218bf6069d20aa4198b0984dfabaa26ca55e13a5055e2f3",
+        "base-files": "f1b94a9e5a52318b353d1416b9ac3823accab2ee3a49e7eaeae9e75da7971e9a",
         "busybox-static": "ea1ee96420013d8404d677a81c92eb54adbf58852ffaa6722a39245025157304",
         "dash": "4287aa31a5c1d9e32f077e90194b37f5d9af326630248c4a3df83c5d3965f219",
         "libbz2-1.0": "4401482dad1f11e370b0d47078b0eef74593d3b12badd8d4277a1c448ab2de15",
@@ -355,7 +355,7 @@ deb_packages(
         "python3-pkg-resources": "pool/main/p/python-setuptools/python3-pkg-resources_40.8.0-1_all.deb",
         "python3-setuptools": "pool/main/p/python-setuptools/python3-setuptools_40.8.0-1_all.deb",
         "readline-common": "pool/main/r/readline/readline-common_7.0-5_all.deb",
-        "tzdata": "pool/main/t/tzdata/tzdata_2021a-0+deb10u1_all.deb",
+        "tzdata": "pool/main/t/tzdata/tzdata_2021a-0+deb10u2_all.deb",
     },
     packages_sha256 = {
         "ca-certificates": "a9e267a24088c793a9cf782455fd344db5fdced714f112a8857c5bfd07179387",
@@ -368,7 +368,7 @@ deb_packages(
         "python3-pkg-resources": "43783cd63c996b36fcf29bfd8be8c44666148c9129ade88985876d7f9c0bf2f6",
         "python3-setuptools": "cd4967dbdfbb59ca451c0717aedda9ed44b63d565d1eda661c12603ac7d44fb6",
         "readline-common": "153d8a5ddb04044d10f877a8955d944612ec9035f4c73eec99d85a92c3816712",
-        "tzdata": "00da63f221b9afa6bc766742807e398cf183565faba339649bafa3f93375fbcb",
+        "tzdata": "df0982c75ccefa2268e77b0c2baba1dd2440bb2a03a9f1fcecebc2f6fce9171f",
     },
     pgp_key = "buster_archive_key",
 )
